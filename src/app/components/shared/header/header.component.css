@@ -1,0 +1,176 @@
+
+@keyframes abrirMenu{
+  0%{
+    width: 0;
+  }
+  50%{
+    width: 45%;
+  }
+  100%{
+    width: 85%;
+  }
+}
+
+@keyframes fecharMenu{
+  0%{
+    width: 85%;
+  }
+  50%{
+    width: 45%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(300%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animacaoAbrir{
+  animation: abrirMenu .2s linear;
+}
+.animacaoFechar{
+  animation: fecharMenu .2s linear;
+}
+
+
+.overlay{
+  display: none;
+  background-color: rgba(73, 72, 70, 0.315);
+  z-index: 2;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7em;
+  font-family: var(--fonte);
+}
+
+.btn_menu, .btn_menu_close{
+  background-color: transparent;
+  border: 0;
+  border-radius: 15px;
+  width: 40px;
+  height: 30px;
+  padding-bottom: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_menu .menuBTN{
+  color: var(--cor-principal);
+  font-size: 33px;
+}
+
+.btn_menu_close{
+  position: absolute;
+  right: 5px;
+  top: 10px;
+}
+
+.close{
+  color: var(--cor-branca);
+
+}
+
+#menu{
+  display: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 85%;
+  padding: 4em 0.4em;
+  border-radius: 30px 0 0 30px;
+  background-color: var(--cor-principal);
+  z-index: 3;
+}
+
+.menu_mobile{
+  height: 100%;
+  opacity: 0;
+  display: flex;
+  animation: slideInRight 0.7s normal;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+ul{
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding: 0;
+}
+
+.animated{
+  list-style: none;
+}
+
+.animated a{
+  text-decoration: none;
+  color: var(--cor-branca);
+  cursor: pointer;
+  font-size: 20px;
+  padding: 0.3em 0.5em;
+  border-radius: 10px;
+
+  &:hover{
+    background-color: var(--cor-secundaria);
+  }
+}
+
+.menu_pc{
+  display: none;
+  animation: slideInRight 1s normal;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+.menu_pc ul{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3em;
+  list-style: none;
+}
+
+.menu_pc li a{
+  text-decoration: none;
+  color: var(--cor-principal);
+  font-size: 24px;
+  transition: .4s;
+  cursor: pointer;
+  padding: 2px 7px;
+
+  &:hover{
+    color: var(--cor-secundaria);
+  }
+}
+
+@media (width >= 1024px) {
+  .btn_menu{
+    display: none;
+  }
+  .menu_pc{
+    display: block;
+  }
+  header{
+    padding: 0.7em 3em;
+  }
+}
+

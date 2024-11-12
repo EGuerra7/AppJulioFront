@@ -1,0 +1,32 @@
+<div class="overlay" id="overlay" (click)="fecharMenu()"></div>
+<header>
+  <img src="../../../../assets/logo.svg">
+
+  <button class="btn_menu" (click)="abrirMenu()"><mat-icon class="menuBTN">menu</mat-icon></button>
+  <section id="menu">
+    <button class="btn_menu_close" (click)="fecharMenu()"><mat-icon class="close">close</mat-icon></button>
+    <nav class="menu_mobile">
+      <ul>
+        <li class="animated"><a [routerLink]="['/']" (click)="fecharMenu()">Portifólio</a></li>
+        <li class="animated"><a [routerLink]="['/feedbacks']" (click)="fecharMenu()">Feedbacks</a></li>
+        <li class="animated">
+          <a *ngIf="usuario && usuario.permissao === 'Administrador' " [routerLink]="['/administrador']" (click)="fecharMenu()">Área do Administrador</a>
+          <a *ngIf="!usuario || usuario.permissao != 'Administrador'" [routerLink]="['/cliente']" (click)="fecharMenu()">Área do Cliente</a>
+        </li>
+        <li class="animated"><a [routerLink]="['/loja']" (click)="fecharMenu()">Loja</a></li>
+      </ul>
+    </nav>
+  </section>
+
+  <nav class="menu_pc">
+    <ul>
+      <li ><a [routerLink]="['/']">Portifólio</a></li>
+      <li><a [routerLink]="['/feedbacks']">Feedbacks</a></li>
+      <li>
+        <a *ngIf="usuario && usuario.permissao === 'Administrador' " [routerLink]="['/administrador']">Área do Administrador</a>
+        <a *ngIf="!usuario || usuario.permissao != 'Administrador'" [routerLink]="['/cliente']">Área do Cliente</a>
+      </li>
+      <li><a [routerLink]="['/loja']">Loja</a></li>
+    </ul>
+  </nav>
+</header>

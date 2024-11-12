@@ -1,0 +1,19 @@
+<div class="progress-bar">
+  <div class="stage" [ngClass]="{'active': status === 'Agendado' || status === 'Em andamento' || status === 'Concluído'}">
+    <mat-icon [ngClass]="{'active': status === 'Agendado' || status === 'Em andamento' || status === 'Concluído'}" class="icon">check</mat-icon>
+  </div>
+  <div class="line" [ngClass]="{'active': status === 'Em andamento' || status === 'Concluído'}"></div>
+  <div class="stage" [ngClass]="{'active': status === 'Em andamento' || status === 'Concluído'}">
+    <mat-icon [ngClass]="{'active': status === 'Em andamento' || status === 'Concluído'}" class="icon">check</mat-icon>
+  </div>
+  <div class="line" [ngClass]="{'active': status === 'Concluído'}"></div>
+  <div class="stage" [ngClass]="{'active': status === 'Concluído'}">
+    <mat-icon class="icon" [ngClass]="{'inactive': status !== 'Concluído', 'none': status === 'Concluído'}">check</mat-icon>
+    <div *ngIf="status === 'Concluído'">
+      <button class="btn_fotos" (click)="acessarFotos()">
+        Acessar fotos
+        <mat-icon class="icon">check</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

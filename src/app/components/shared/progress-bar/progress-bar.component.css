@@ -1,0 +1,68 @@
+.progress-bar {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: transparent; /* Cor padrão dos estágios */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.stage.active {
+  background-color: var(--cor-secundaria); /* Cor ativa para os estágios concluídos */
+}
+
+.line {
+  flex-grow: 1;
+  height: 2px;
+  background-color: var(--cor-branca); /* Cor padrão das linhas */
+  margin: 0 4px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.line.active {
+  background-color: var(--cor-secundaria); /* Cor ativa para as linhas concluídas */
+}
+
+.icon{
+  color: var(--cor-secundaria); /* Cor do ícone */
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  transition: color 0.3s ease-in-out;
+}
+
+.btn_fotos {
+  background-color: var(--cor-secundaria); /* Cor de fundo do botão */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--cor-principal);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.btn_fotos .icon {
+  margin-left: 5px;
+  color: var(--cor-principal);
+}
+
+.icon.active{
+  color: var(--cor-principal);
+}
+
+.icon.none{
+  display: none;
+}
+
+.icon.inactive{
+  color: var(--cor-secundaria);
+}
+

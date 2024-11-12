@@ -1,0 +1,50 @@
+.imagens {
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+  margin-top: 2em;
+}
+
+.image-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 7px;
+  max-width: 100vw;
+  width: 100%;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.image-container div {
+  overflow: hidden; /* Garante que a imagem não saia dos limites */
+  border-radius: 5px;
+  box-shadow: 0 0 5px var(--cor-secundaria);
+}
+
+
+.random-image {
+  width: 100%;
+  height: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+  display: block;
+}
+
+@media (width >= 700px){
+  .imagens{
+    padding: 1em;
+    margin-top: 3em;
+  }
+  .image-container{
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1em;
+  }
+}
+
+@media (width >= 900px){
+  .image-container{
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1em;
+  }
+}

@@ -1,0 +1,80 @@
+<main>
+  <button class="logout" (click)="logout()">Sair</button>
+  <div class="divider"></div>
+    <section class="infos" *ngIf="usuario">
+        <h1>{{ usuario.nome }}</h1>
+        <div class="infos_user">
+          <span>
+            <img src="../../../assets/niver.svg" alt="imagem de aniversário">
+            {{ usuario.dataAniversario | date:'dd/MM' }} <b>(Faltam {{ diasRestantes }} dias para o seu aniversário)</b>
+          </span>
+
+          <span>
+            <img src="../../../assets/camera.svg" alt="imagem de clicks">
+            {{ usuario.clicks }} clicks <b>(Pontos que podem ser trocados por cupons na loja)</b>
+          </span>
+          <span>
+            <img src="../../../assets/cupom.svg" alt="imagem de cupom">
+            2 cupons
+          </span>
+        </div>
+        <div class="trabalhos">
+          <p *ngIf="trabalhos">Trabalhos agendados: {{ trabalhos['Agendado'] || 0 }}</p>
+          <p *ngIf="trabalhos">Trabalhos em andamento: {{ trabalhos['Em andamento'] || 0 }}</p>
+          <p *ngIf="trabalhos">Trabalhos concluídos: {{ trabalhos['Concluído'] || 0 }}</p>
+        </div>
+    </section>
+
+  <div class="divider"></div>
+
+    <section class="fotos">
+      <div class="fotos_subclass">
+        <h2>Agendadas</h2>
+        <div *ngFor="let foto of fotosAgendadas"  class="box_fotos">
+          <span class="click">+{{ foto.click }} clicks</span>
+          <span><b>Data:</b> {{ foto.data | date:'dd/MM/yy' }}</span>
+          <span><b>Horário:</b>{{ foto.horario }}</span>
+          <span><b>Local:</b> {{ foto.local }}</span>
+          <span><b>Tipo:</b> {{ foto.tipo }}</span>
+          <span><b>Valor Total:</b> R$ {{ foto.valorTotal }}</span>
+          <span><b>Valor Pago:</b> R$ {{ foto.valorPago }}</span>
+          <span><b>Valor Restante:</b> R$ {{ foto.valorRestante }}</span>
+
+          <app-progress-bar [status]="foto.status ?? 'Agendado'"></app-progress-bar>
+        </div>
+      </div>
+
+      <div class="fotos_subclass">
+        <h2>Em Andamento</h2>
+        <div *ngFor="let foto of fotosEmAndamento"  class="box_fotos">
+          <span class="click">+{{ foto.click }} clicks</span>
+          <span><b>Data:</b> {{ foto.data | date:'dd/MM/yy' }}</span>
+          <span><b>Horário:</b>{{ foto.horario }}</span>
+          <span><b>Local:</b> {{ foto.local }}</span>
+          <span><b>Tipo:</b> {{ foto.tipo }}</span>
+          <span><b>Valor Total:</b> R$ {{ foto.valorTotal }}</span>
+          <span><b>Valor Pago:</b> R$ {{ foto.valorPago }}</span>
+          <span><b>Valor Restante:</b> R$ {{ foto.valorRestante }}</span>
+
+          <app-progress-bar [status]="foto.status ?? 'Agendado'"></app-progress-bar>
+        </div>
+      </div>
+
+      <div class="fotos_subclass">
+        <h2>Concluídas</h2>
+        <div *ngFor="let foto of fotosConcluidas" class="box_fotos">
+          <span class="click">+{{ foto.click }} clicks</span>
+          <span><b>Data:</b> {{ foto.data | date:'dd/MM/yy' }}</span>
+          <span><b>Horário:</b>{{ foto.horario }}</span>
+          <span><b>Local:</b> {{ foto.local }}</span>
+          <span><b>Tipo:</b> {{ foto.tipo }}</span>
+          <span><b>Valor Total:</b> R$ {{ foto.valorTotal }}</span>
+          <span><b>Valor Pago:</b> R$ {{ foto.valorPago }}</span>
+          <span><b>Valor Restante:</b> R$ {{ foto.valorRestante }}</span>
+
+          <app-progress-bar [status]="foto.status ?? 'Agendado'" [linkFoto]="foto.linkFoto ?? ''"></app-progress-bar>
+        </div>
+      </div>
+    </section>
+
+</main>

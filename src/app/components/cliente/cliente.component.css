@@ -1,0 +1,111 @@
+
+
+main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fonte);
+  margin-top: 2em;
+  width: 100%;
+  padding-bottom: 5em;
+}
+.divider{
+  width: 90%;
+  height: 3px;
+  background-color: var(--cor-principal);
+}
+
+.infos{
+  display: flex;
+  flex-direction: column;
+  padding: 0.7em;
+  gap: 0.5em;
+}
+
+.infos h1{
+  color: var(--cor-principal);
+  font-size: 18px;
+  margin: 0;
+  text-align: center;
+}
+
+.infos_user{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+}
+
+.infos_user span{
+  display: flex;
+  color: var(--cor-principal);
+  font-size: 10px;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.infos_user span b{
+  font-size: 8px;
+  font-weight: 400;
+}
+
+.trabalhos{
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.trabalhos p{
+  color: var(--cor-principal);
+  font-size: 8px;
+  margin: 0;
+}
+
+.logout{
+  background-color: transparent;
+  border: 0;
+  color: var(--cor-principal);
+  background-color: var(--cor-secundaria);
+  border-radius: 10px;
+  padding: 0 1em;
+  font-size: 14px;
+  margin-bottom: 0.5em;
+}
+
+.fotos{
+  width: 90%;
+}
+
+.fotos_subclass{
+  color: var(--cor-principal);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.fotos_subclass h2{
+  font-size: 12px;
+  margin: 0;
+}
+
+.box_fotos{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cor-principal);
+  color: var(--cor-secundaria);
+  font-size: 10px;
+  width: 95%;
+  padding: 1em;
+  margin: 0 auto;
+  border-radius: 10px;
+  position: relative;
+}
+
+.box_fotos .click{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-weight: bold;
+}
