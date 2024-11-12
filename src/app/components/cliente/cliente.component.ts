@@ -18,7 +18,7 @@ import { UsuarioService } from '../service/usuario.service';
   templateUrl: './cliente.component.html',
   styleUrl: './cliente.component.css'
 })
-export class ClienteComponent implements OnInit{
+export class ClienteComponent implements OnInit {
 
   usuario: any;
   trabalhos!: StatusTrabalho;
@@ -29,13 +29,12 @@ export class ClienteComponent implements OnInit{
   fotosEmAndamento: Foto[] = [];
   fotosConcluidas: Foto[] = [];
 
-  constructor(private loginService: LoginService, private fotosService: FotosService, private usuarioService: UsuarioService){
+  constructor(private loginService: LoginService, private fotosService: FotosService, private usuarioService: UsuarioService) {
 
   }
 
   ngOnInit(): void {
     this.buscarUsuario();
-    this.buscarFotosIndividual();
     if (this.usuario && this.usuario.dataAniversario) {
       this.calcularDiasRestantes(this.usuario.dataAniversario);
     }
@@ -45,53 +44,53 @@ export class ClienteComponent implements OnInit{
   buscarUsuario() {
     const usuarioLogin = this.loginService.obterUsuario();
 
-    console.log(usuarioLogin);
-
     if (usuarioLogin && usuarioLogin.id) {
-        this.usuarioService.listarIndividual(usuarioLogin).subscribe(
-            (response) => {
-                this.usuario = response;
+      this.usuarioService.listarIndividual(usuarioLogin).subscribe(
+        (response) => {
+          this.usuario = response;
 
-                if (this.usuario && this.usuario.id) {
-                    this.fotosService.statusTrabalho(usuarioLogin.id!).subscribe(
-                        (status: StatusTrabalho) => {
-                            this.trabalhos = status;
-                        },
-                        (error) => {
-                            console.error('Erro ao obter status do trabalho:', error);
-                        }
-                    );
-                }
-            },
-            (error) => {
-                console.error('Erro ao buscar usuário:', error);
-            }
-        );
-    } else {
-        console.error('Usuário de login não encontrado ou ID não definido');
-    }
-}
+          if (this.usuario && this.usuario.id) {
+            this.buscarFotosIndividual();
 
-
-buscarFotosIndividual() {
-  if (this.usuario && this.usuario.id) {
-      this.fotosService.listarFotosIndividuais(this.usuario).subscribe(
-          (response) => {
-              this.fotos = response;
-
-              // Filtrando as fotos por status
-              this.fotosAgendadas = this.fotos.filter(foto => foto.status === 'Agendado');
-              this.fotosEmAndamento = this.fotos.filter(foto => foto.status === 'Em andamento');
-              this.fotosConcluidas = this.fotos.filter(foto => foto.status === 'Concluído');
-          },
-          (error) => {
-              console.error("Erro ao carregar as fotos: " + error);
+            this.fotosService.statusTrabalho(usuarioLogin.id!).subscribe(
+              (status: StatusTrabalho) => {
+                this.trabalhos = status;
+              },
+              (error) => {
+                console.error('Erro ao obter status do trabalho:', error);
+              }
+            );
           }
+        },
+        (error) => {
+          console.error('Erro ao buscar usuário:', error);
+        }
       );
-  } else {
-      console.error("Usuário não encontrado ou ID inválido.");
+    } else {
+      console.error('Usuário de login não encontrado ou ID não definido');
+    }
   }
-}
+
+
+  buscarFotosIndividual() {
+    if (this.usuario && this.usuario.id) {
+      this.fotosService.listarFotosIndividuais(this.usuario).subscribe(
+        (response) => {
+          this.fotos = response;
+
+          // Filtra as fotos por status
+          this.fotosAgendadas = this.fotos.filter(foto => foto.status === 'Agendado');
+          this.fotosEmAndamento = this.fotos.filter(foto => foto.status === 'Em andamento');
+          this.fotosConcluidas = this.fotos.filter(foto => foto.status === 'Concluído');
+        },
+        (error) => {
+          console.error("Erro ao carregar as fotos: " + error);
+        }
+      );
+    } else {
+      console.error("Usuário não encontrado ou ID inválido.");
+    }
+  }
 
 
   calcularDiasRestantes(dataAniversario: string): void {
@@ -109,7 +108,7 @@ buscarFotosIndividual() {
   }
 
 
-  logout(){
+  logout() {
     this.loginService.logout();
   }
 
