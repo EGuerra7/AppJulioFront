@@ -64,13 +64,20 @@ main{
 
 .logout{
   background-color: transparent;
-  border: 0;
   color: var(--cor-principal);
-  background-color: var(--cor-secundaria);
-  border-radius: 10px;
-  padding: 0 1em;
-  font-size: 14px;
+  border: 0;
+  font-size: 15px;
   margin-bottom: 0.5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.logout mat-icon{
+  font-size: 15px;
+  width: 15px;
+  height: 15px;
 }
 
 .fotos{

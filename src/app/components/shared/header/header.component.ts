@@ -4,6 +4,7 @@ import {Component, OnInit } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { LoginService } from '../../service/login.service';
+import { UsuarioService } from '../../service/usuario.service';
 
 
 
@@ -17,13 +18,24 @@ import { LoginService } from '../../service/login.service';
 })
 export class HeaderComponent implements OnInit{
 
-  usuario!: any;
+  usuario: any;
 
-  constructor(private loginService: LoginService){}
+  constructor(private loginService: LoginService, private usuarioService: UsuarioService){}
 
   ngOnInit() {
-    this.loginService.usuario$.subscribe(usuario => {
-      this.usuario = usuario;
+    this.loginService.usuario$.subscribe((usuarioLogin) => {
+      if (usuarioLogin && usuarioLogin.id) {
+        this.usuarioService.listarIndividual(usuarioLogin).subscribe(
+          (response) => {
+            this.usuario = response;
+          },
+          (erro) => {
+            console.log(erro);
+          }
+        );
+      } else {
+        return;
+      }
     });
   }
 

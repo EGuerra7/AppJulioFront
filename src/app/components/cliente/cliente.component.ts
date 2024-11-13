@@ -7,6 +7,7 @@ import { FotosService } from '../service/fotos.service';
 import { Foto } from '../model/foto.model';
 import { ProgressBarComponent } from "../shared/progress-bar/progress-bar.component";
 import { UsuarioService } from '../service/usuario.service';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -14,11 +15,11 @@ import { UsuarioService } from '../service/usuario.service';
 @Component({
   selector: 'app-cliente',
   standalone: true,
-  imports: [DatePipe, CommonModule, ProgressBarComponent],
+  imports: [DatePipe, CommonModule, ProgressBarComponent, MatIconModule],
   templateUrl: './cliente.component.html',
   styleUrl: './cliente.component.css'
 })
-export class ClienteComponent implements OnInit {
+export class ClienteComponent implements OnInit{
 
   usuario: any;
   trabalhos!: StatusTrabalho;
@@ -29,68 +30,71 @@ export class ClienteComponent implements OnInit {
   fotosEmAndamento: Foto[] = [];
   fotosConcluidas: Foto[] = [];
 
-  constructor(private loginService: LoginService, private fotosService: FotosService, private usuarioService: UsuarioService) {
+  constructor(private loginService: LoginService, private fotosService: FotosService, private usuarioService: UsuarioService){
 
   }
 
   ngOnInit(): void {
     this.buscarUsuario();
-    if (this.usuario && this.usuario.dataAniversario) {
-      this.calcularDiasRestantes(this.usuario.dataAniversario);
-    }
-
   }
 
   buscarUsuario() {
     const usuarioLogin = this.loginService.obterUsuario();
 
     if (usuarioLogin && usuarioLogin.id) {
-      this.usuarioService.listarIndividual(usuarioLogin).subscribe(
-        (response) => {
-          this.usuario = response;
+        this.usuarioService.listarIndividual(usuarioLogin).subscribe(
+            (response) => {
+                this.usuario = response;
 
-          if (this.usuario && this.usuario.id) {
-            this.buscarFotosIndividual();
+                if (this.usuario && this.usuario.id) {
+                    // Chama buscarFotosIndividual() após obter o usuário
+                    this.buscarFotosIndividual();
 
-            this.fotosService.statusTrabalho(usuarioLogin.id!).subscribe(
-              (status: StatusTrabalho) => {
-                this.trabalhos = status;
-              },
-              (error) => {
-                console.error('Erro ao obter status do trabalho:', error);
-              }
-            );
-          }
-        },
-        (error) => {
-          console.error('Erro ao buscar usuário:', error);
-        }
-      );
+                    // Obtém o status do trabalho
+                    this.fotosService.statusTrabalho(this.usuario.id!).subscribe(
+                        (status: StatusTrabalho) => {
+                            this.trabalhos = status;
+                        },
+                        (error) => {
+                            console.error('Erro ao obter status do trabalho:', error);
+                        }
+                    );
+
+                    // Calcula os dias restantes, após garantir que usuario.dataAniversario existe
+                    if (this.usuario.dataAniversario) {
+                        this.calcularDiasRestantes(this.usuario.dataAniversario);
+                    }
+                }
+            },
+            (error) => {
+                console.error('Erro ao buscar usuário:', error);
+            }
+        );
     } else {
-      console.error('Usuário de login não encontrado ou ID não definido');
+        console.error('Usuário de login não encontrado ou ID não definido');
     }
-  }
+}
 
 
-  buscarFotosIndividual() {
-    if (this.usuario && this.usuario.id) {
+buscarFotosIndividual() {
+  if (this.usuario && this.usuario.id) {
       this.fotosService.listarFotosIndividuais(this.usuario).subscribe(
-        (response) => {
-          this.fotos = response;
+          (response) => {
+              this.fotos = response;
 
-          // Filtra as fotos por status
-          this.fotosAgendadas = this.fotos.filter(foto => foto.status === 'Agendado');
-          this.fotosEmAndamento = this.fotos.filter(foto => foto.status === 'Em andamento');
-          this.fotosConcluidas = this.fotos.filter(foto => foto.status === 'Concluído');
-        },
-        (error) => {
-          console.error("Erro ao carregar as fotos: " + error);
-        }
+              // Filtrando as fotos por status
+              this.fotosAgendadas = this.fotos.filter(foto => foto.status === 'Agendado');
+              this.fotosEmAndamento = this.fotos.filter(foto => foto.status === 'Em andamento');
+              this.fotosConcluidas = this.fotos.filter(foto => foto.status === 'Concluído');
+          },
+          (error) => {
+              console.error("Erro ao carregar as fotos: " + error);
+          }
       );
-    } else {
+  } else {
       console.error("Usuário não encontrado ou ID inválido.");
-    }
   }
+}
 
 
   calcularDiasRestantes(dataAniversario: string): void {
@@ -108,7 +112,7 @@ export class ClienteComponent implements OnInit {
   }
 
 
-  logout() {
+  logout(){
     this.loginService.logout();
   }
 

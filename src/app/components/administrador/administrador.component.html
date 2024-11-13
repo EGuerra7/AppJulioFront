@@ -1,3 +1,20 @@
-<p>administrador works!</p>
+<main>
+  <h1>Olá, {{ usuario?.nome }}</h1>
 
-<button (click)="logout()">sair</button>
+  <nav>
+    <button [routerLink]="['/fotos']">Registro de fotos</button>
+    <button [routerLink]="['/clientes']">Registro de Clientes</button>
+    <button [routerLink]="['/portifolio']">Fotos do Portifólio</button>
+    <button [routerLink]="['/cupons']">Cupons</button>
+  </nav>
+
+  <button class="logout" (click)="logout()">Sair <mat-icon>logout</mat-icon></button>
+</main>
+
+
+
+
+
+
+
+

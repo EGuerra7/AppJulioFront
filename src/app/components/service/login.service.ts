@@ -10,38 +10,49 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
 
-  private usuarioSubject = new BehaviorSubject<any>(null);
-  usuario$: Observable<any> = this.usuarioSubject.asObservable();
+  private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
+  usuario$ = this.usuarioSubject.asObservable();
+
   private readonly API = "http://localhost:8080/usuario/login"
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+    this.carregarUsuarioLocal();
+   }
 
   public login(usuario: LoginReponse): Observable<Usuario> {
     return this.http.post<Usuario>(this.API, usuario);
   }
 
   logout() {
-    this.usuarioSubject.next(null)
-    localStorage.removeItem('usuario');
+    this.usuarioSubject.next(null);
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.removeItem('usuario');
+    }
+
     this.router.navigate(['/login']);
   }
 
   salvarUsuario(usuario: Usuario) {
     this.usuarioSubject.next(usuario);
-    localStorage.setItem('usuario', JSON.stringify(usuario));
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.setItem('usuario', JSON.stringify(usuario));
+    }
   }
 
   obterUsuario(): Usuario | null {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const usuarioJson = localStorage.getItem('usuario');
-      return usuarioJson ? JSON.parse(usuarioJson) : null;
-    }
-    return null;
-  }
-
-  obterUsuarioAtual(): any {
     return this.usuarioSubject.value;
   }
+
+  private carregarUsuarioLocal() {
+    if (typeof window !== 'undefined' && localStorage) {
+      const usuarioString = localStorage.getItem('usuario');
+      if (usuarioString) {
+        const usuario = JSON.parse(usuarioString);
+        this.usuarioSubject.next(usuario);
+      }
+    }
+  }
+
 
   isLoggedIn(): boolean {
     return this.obterUsuario() !== null;

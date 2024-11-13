@@ -5,6 +5,11 @@ import { ClienteComponent } from './components/cliente/cliente.component';
 import { AuthLoginService } from './components/service/security/auth-login.service';
 import { LoginComponent } from './components/login/login.component';
 import { AdministradorComponent } from './components/administrador/administrador.component';
+import { LojaComponent } from './components/loja/loja.component';
+import { FeedbacksComponent } from './components/feedbacks/feedbacks.component';
+import { FotosComponent } from './components/administrador/fotos/fotos.component';
+import { PortfolioComponent } from './components/administrador/portfolio/portfolio.component';
+import { CuponsComponent } from './components/administrador/cupons/cupons.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +28,35 @@ export const routes: Routes = [
   {
     path:"administrador",
     component: AdministradorComponent,
+    canActivate: [AdmAuthService]
+  },
+  {
+    path:"loja",
+    component: LojaComponent,
+    canActivate: [AuthLoginService]
+  },
+  {
+    path:"feedbacks",
+    component: FeedbacksComponent
+  },
+  {
+    path:"fotos",
+    component:FotosComponent,
+    canActivate: [AdmAuthService]
+  },
+  {
+    path:"clientes",
+    component:ClienteComponent,
+    canActivate: [AdmAuthService]
+  },
+  {
+    path:"portifolio",
+    component: PortfolioComponent,
+    canActivate: [AdmAuthService]
+  },
+  {
+    path:"cupons",
+    component:CuponsComponent,
     canActivate: [AdmAuthService]
   }
 ];

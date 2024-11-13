@@ -1,0 +1,52 @@
+main, nav{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fonte);
+}
+
+main{
+  gap: 3em;
+}
+
+main h1{
+  color: var(--cor-principal);
+  font-size: 20px;
+}
+
+nav{
+  gap: 1em;
+  width: 100%;
+}
+
+nav button{
+  background-color: var(--cor-principal);
+  width: 90%;
+  height: 43px;
+  border-radius: 5px;
+  border: 0;
+  color: var(--cor-secundaria);
+  font-size: 18px;
+  font-weight: lighter;
+}
+
+.logout{
+  background-color: transparent;
+  color: var(--cor-principal);
+  border: 0;
+  font-size: 15px;
+  margin-bottom: 0.5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.logout mat-icon{
+  font-size: 15px;
+  width: 15px;
+  height: 15px;
+}
+
+

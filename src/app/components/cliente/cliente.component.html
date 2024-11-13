@@ -1,8 +1,8 @@
 <main>
-  <button class="logout" (click)="logout()">Sair</button>
+
   <div class="divider"></div>
     <section class="infos" *ngIf="usuario">
-        <h1>{{ usuario.nome }}</h1>
+        <h1>{{ usuario?.nome }}</h1>
         <div class="infos_user">
           <span>
             <img src="../../../assets/niver.svg" alt="imagem de aniversário">
@@ -24,6 +24,7 @@
           <p *ngIf="trabalhos">Trabalhos concluídos: {{ trabalhos['Concluído'] || 0 }}</p>
         </div>
     </section>
+      <button class="logout" (click)="logout()">Sair <mat-icon>logout</mat-icon></button>
 
   <div class="divider"></div>
 
