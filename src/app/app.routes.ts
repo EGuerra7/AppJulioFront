@@ -10,6 +10,7 @@ import { FeedbacksComponent } from './components/feedbacks/feedbacks.component';
 import { FotosComponent } from './components/administrador/fotos/fotos.component';
 import { PortfolioComponent } from './components/administrador/portfolio/portfolio.component';
 import { CuponsComponent } from './components/administrador/cupons/cupons.component';
+import { ClientesComponent } from './components/administrador/clientes/clientes.component';
 
 export const routes: Routes = [
   {
@@ -45,8 +46,8 @@ export const routes: Routes = [
     canActivate: [AdmAuthService]
   },
   {
-    path:"clientes",
-    component:ClienteComponent,
+    path:"registroClientes",
+    component:ClientesComponent,
     canActivate: [AdmAuthService]
   },
   {

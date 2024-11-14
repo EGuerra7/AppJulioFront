@@ -1,1 +1,23 @@
-<p>clientes works!</p>
+<main>
+  <h1>Clientes</h1>
+  <button>Cadastrar cliente</button>
+  <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Apelido</th>
+          <th>Data de aniversário</th>
+          <th>Permissão</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.nome }}</td>
+          <td>{{ usuario.apelido }}</td>
+          <td>{{ usuario.dataAniversario | date: "dd/MM"}}</td>
+          <td>{{ usuario.permissao }}</td>
+        </tr>
+      </tbody>
+  </table>
+</main>

@@ -15,4 +15,8 @@ export class UsuarioService {
   listarIndividual(usuario: Usuario): Observable<Usuario>{
     return this.http.get<Usuario>(this.API + "/" + usuario.id);
   }
+
+  listarUsuarios(): Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(this.API);
+  }
 }
