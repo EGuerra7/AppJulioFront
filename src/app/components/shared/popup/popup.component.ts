@@ -1,16 +1,16 @@
+import { Usuario } from './../../model/usuario.model';
 import { UsuarioService } from './../../service/usuario.service';
 import { Component, Inject, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA,
+import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
-import { Usuario } from '../../model/usuario.model';
 import { Foto } from '../../model/foto.model';
 import { FotosService } from '../../service/fotos.service';
-import { error } from 'console';
 
 @Component({
   selector: 'app-popup',
@@ -19,7 +19,7 @@ import { error } from 'console';
   templateUrl: './popup.component.html',
   styleUrl: './popup.component.css'
 })
-export class PopupComponent implements OnInit{
+export class PopupComponent implements OnInit {
   listUsuarios: Usuario[] = [];
   usuarioForm!: FormGroup;
   fotoForm!: FormGroup;
@@ -32,7 +32,7 @@ export class PopupComponent implements OnInit{
     private fotoService: FotosService,
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { tipo: string, item?: any, isEdit: boolean },
-   ){
+  ) {
 
     this.isCliente = this.data.tipo === 'Cliente';
     this.isFoto = this.data.tipo === 'Foto';
@@ -43,31 +43,32 @@ export class PopupComponent implements OnInit{
       nome: new FormControl(this.isCliente ? item.nome || "" : "", Validators.required),
       apelido: new FormControl(this.isCliente ? item.apelido || "" : "", Validators.required),
       senha: new FormControl(this.isCliente ? item.senha || "" : "", Validators.required),
-      dataAniversario: new FormControl( this.isCliente ? this.converterParaFormatoDdMmYyyy(item.dataAniversario) || "" : "", Validators.required),
+      dataAniversario: new FormControl(this.isCliente ? this.converterParaFormatoDdMmYyyy(item.dataAniversario) || "" : "", Validators.required),
       clicks: new FormControl(this.isCliente ? item.clicks || 0 : 0),
-      permissao: new FormControl(this.isCliente ? item.permissao || null : null ,Validators.required)
+      permissao: new FormControl(this.isCliente ? item.permissao || null : null, Validators.required)
     })
 
     this.fotoForm = new FormGroup({
-      usuario: new FormControl("", Validators.required),
-      data: new FormControl("", Validators.required),
-      horario: new FormControl("", Validators.required),
-      local: new FormControl("", Validators.required),
-      tipo: new FormControl("", Validators.required),
-      valorTotal: new FormControl(null, Validators.required),
-      valorPago: new FormControl(null),
-      descricaoPagamento: new FormControl("", Validators.required),
-      status: new FormControl("", Validators.required),
-      linkFoto: new FormControl(""),
-      click: new FormControl(null, Validators.required)
+      usuario: new FormControl(this.isFoto ? item.usuario : "", Validators.required),
+      data: new FormControl(this.isFoto ? this.converterParaFormatoDdMmYyyy(item.data) || "" : "", Validators.required),
+      horario: new FormControl(this.isFoto ? item.horario || "" : "", Validators.required),
+      local: new FormControl(this.isFoto ? item.local || "" : "", Validators.required),
+      tipo: new FormControl(this.isFoto ? item.tipo || null : null, Validators.required),
+      valorTotal: new FormControl(this.isFoto ? item.valorTotal || null : null, Validators.required),
+      valorPago: new FormControl(this.isFoto ? item.valorPago || null : null),
+      descricaoPagamento: new FormControl(this.isFoto ? item.descricaoPagamento || "" : "", Validators.required),
+      status: new FormControl(this.isFoto ? item.status || "" : "", Validators.required),
+      linkFoto: new FormControl(this.isFoto ? item.linkFoto || "" : ""),
+      click: new FormControl(this.isFoto ? item.click || null : null, Validators.required)
     })
+
   }
 
   ngOnInit(): void {
     this.buscarUsuarios();
   }
 
-  buscarUsuarios(){
+  buscarUsuarios() {
     this.usuarioService.listarUsuarios().subscribe(response => {
       this.listUsuarios = response;
     }, error => {
@@ -79,7 +80,7 @@ export class PopupComponent implements OnInit{
 
 
 
-  cadastrar(){
+  cadastrar() {
     if (this.data.tipo === "Cliente") {
       if (this.usuarioForm.valid) {
         const cliente: Usuario = this.usuarioForm.value;
@@ -119,7 +120,7 @@ export class PopupComponent implements OnInit{
       if (this.fotoForm.valid) {
         const foto: Foto = this.fotoForm.value;
         const dataFormatada = this.converterDataParaFormatoBackend(foto.data!);
-        const horaFormatada = `${foto.horario}:00`;
+        const horaFormatada = this.adicionarSegundos(foto.horario!);
 
         const dadosParaEnviar = {
           ...foto,
@@ -127,14 +128,27 @@ export class PopupComponent implements OnInit{
           horario: horaFormatada
         };
 
-        console.log(dadosParaEnviar);
+        if (this.data.isEdit) {
+          // Edição de usuário
+          const dadosComId = {
+            ...dadosParaEnviar,
+            id: this.data.item.id
+          };
 
-        this.fotoService.gerarFoto(dadosParaEnviar).subscribe(() => {
-          alert("Foto gerada com sucesso");
-          this.dialogRef.close();
-        }, error => {
-          console.log("Erro!" + JSON.stringify(error));
-        });
+          this.fotoService.editarFoto(dadosComId).subscribe(() => {
+            alert("Foto alterada com sucesso!");
+            this.dialogRef.close();
+          }, erro => {
+            alert("erro!");
+          })
+        } else {
+          this.fotoService.gerarFoto(dadosParaEnviar).subscribe(() => {
+            alert("Foto gerada com sucesso");
+            this.dialogRef.close();
+          }, error => {
+            console.log("Erro!" + JSON.stringify(error));
+          });
+        }
       } else {
         alert("Insira todos os itens necessários!");
       }
@@ -151,21 +165,29 @@ export class PopupComponent implements OnInit{
   converterParaFormatoDdMmYyyy(data: string | Date): string {
     if (!data) return '';
 
-  // Se for uma string, tente convertê-la para um objeto Date
-  const dataObj = typeof data === 'string' ? new Date(data + 'T00:00:00') : data;
+    // Se for uma string, tente convertê-la para um objeto Date
+    const dataObj = typeof data === 'string' ? new Date(data + 'T00:00:00') : data;
 
-  if (isNaN(dataObj.getTime())) {
-    console.error('Data inválida:', data);
-    return '';
+    if (isNaN(dataObj.getTime())) {
+      console.error('Data inválida:', data);
+      return '';
+    }
+
+    const dia = dataObj.getDate().toString().padStart(2, '0');
+    const mes = (dataObj.getMonth() + 1).toString().padStart(2, '0');
+    const ano = dataObj.getFullYear();
+
+    return `${dia}/${mes}/${ano}`;
   }
 
-  const dia = dataObj.getDate().toString().padStart(2, '0');
-  const mes = (dataObj.getMonth() + 1).toString().padStart(2, '0');
-  const ano = dataObj.getFullYear();
+  adicionarSegundos(horario: string): string {
+    if (horario.split(":").length === 3) {
+      return horario;
+    }
 
-  return `${dia}/${mes}/${ano}`;
+    // Adiciona os segundos
+    return horario + ":00";
   }
-
 
   converterDataParaFormatoBackend(data: string): string {
     // Supondo que a data está no formato "dd/MM/yyyy"

@@ -14,20 +14,24 @@ export class FotosService {
 
   constructor(private http: HttpClient) { }
 
-  public gerarFoto(foto: Foto): Observable<Foto>{
+  public gerarFoto(foto: Foto): Observable<Foto> {
     return this.http.post<Foto>(this.API, foto);
   }
 
-  public listarFotos(): Observable<Foto[]>{
+  public editarFoto(foto: Foto): Observable<Foto> {
+    return this.http.put<Foto>(this.API, foto);
+  }
+
+  public listarFotos(): Observable<Foto[]> {
     return this.http.get<Foto[]>(this.API);
   }
 
 
-  public listarFotosIndividuais(usuario: Usuario): Observable<Foto[]>{
+  public listarFotosIndividuais(usuario: Usuario): Observable<Foto[]> {
     return this.http.get<Foto[]>(this.API + "/" + usuario.id);
   }
 
-  public statusTrabalho(usuarioId: number): Observable<StatusTrabalho>{
+  public statusTrabalho(usuarioId: number): Observable<StatusTrabalho> {
     return this.http.get<StatusTrabalho>(this.API + "/status/" + usuarioId);
   }
 }
