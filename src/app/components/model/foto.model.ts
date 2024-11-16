@@ -1,10 +1,11 @@
 import { Usuario } from './usuario.model';
-import { Time } from "@angular/common";
+
 
 export class Foto{
   id?: number;
-  data?: Date;
-  horario?: Time;
+  data?: string;
+  horario?: string;
+  horaFormatada?: string;
   local?: string;
   tipo?: string;
   valorTotal?: number;

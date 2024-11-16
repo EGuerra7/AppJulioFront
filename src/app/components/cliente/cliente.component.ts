@@ -17,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [DatePipe, CommonModule, ProgressBarComponent, MatIconModule],
   templateUrl: './cliente.component.html',
-  styleUrl: './cliente.component.css'
+  styleUrl: './cliente.component.css',
+  providers: [DatePipe]
 })
 export class ClienteComponent implements OnInit{
 
@@ -30,7 +31,7 @@ export class ClienteComponent implements OnInit{
   fotosEmAndamento: Foto[] = [];
   fotosConcluidas: Foto[] = [];
 
-  constructor(private loginService: LoginService, private fotosService: FotosService, private usuarioService: UsuarioService){
+  constructor(private loginService: LoginService, private fotosService: FotosService, private usuarioService: UsuarioService, private datePipe: DatePipe){
 
   }
 
@@ -82,10 +83,15 @@ buscarFotosIndividual() {
           (response) => {
               this.fotos = response;
 
+              this.fotos.forEach(foto => {
+                foto.horaFormatada = this.formatarHoras(foto.horario!);
+              });
               // Filtrando as fotos por status
               this.fotosAgendadas = this.fotos.filter(foto => foto.status === 'Agendado');
               this.fotosEmAndamento = this.fotos.filter(foto => foto.status === 'Em andamento');
               this.fotosConcluidas = this.fotos.filter(foto => foto.status === 'Concluído');
+
+
           },
           (error) => {
               console.error("Erro ao carregar as fotos: " + error);
@@ -109,6 +115,16 @@ buscarFotosIndividual() {
     // Calcula a diferença em dias
     const diffTime = aniversario.getTime() - dataAtual.getTime();
     this.diasRestantes = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  }
+
+
+  formatarHoras(hora: string): string {
+    // Formatar cada foto com a hora formatada
+     // Cria uma data fictícia, onde a data é irrelevante e só a hora importa
+     const horarioDate = new Date(`1970-01-01T${hora}`);
+
+     // Agora o DatePipe consegue formatar a hora
+     return this.datePipe.transform(horarioDate, 'HH:mm') || '';
   }
 
 

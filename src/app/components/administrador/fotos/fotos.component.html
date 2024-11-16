@@ -1,1 +1,83 @@
-<p>fotos works!</p>
+<button [routerLink]="['/administrador']" class="voltar"><mat-icon>arrow_back</mat-icon></button>
+<main>
+  <h1>Fotos</h1>
+  <button (click)="openRegisterDialog('Foto')">Novas fotos</button>
+
+  <!--Agendados-->
+  <section>
+    <h2>Agendados</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Horario</th>
+          <th>Cliente</th>
+          <th>Tipo</th>
+          <th>Valor restante</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let foto of fotosAgendadas">
+          <td>{{ foto.data | date:'dd/MM/yyyy'  }}</td>
+          <td>{{ foto.horaFormatada }}</td>
+          <td><button (click)="openDialog('Foto', foto)">{{ foto.usuario?.nomeFormatado }}</button></td>
+          <td>{{ foto.tipo }}</td>
+          <td>R$ {{ foto.valorRestante }}</td>
+        </tr>
+      </tbody>
+  </table>
+  </section>
+
+  <!--Em andamento-->
+  <section>
+    <h2>Em andamento</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Horario</th>
+          <th>Cliente</th>
+          <th>Tipo</th>
+          <th>Valor restante</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let foto of fotosEmAndamento">
+          <td>{{ foto.data | date:'dd/MM/yyyy'  }}</td>
+          <td>{{ foto.horaFormatada }}</td>
+          <td><button (click)="openDialog('Foto', foto)">{{ foto.usuario?.nomeFormatado }}</button></td>
+          <td>{{ foto.tipo }}</td>
+          <td>R$ {{ foto.valorRestante }}</td>
+        </tr>
+      </tbody>
+  </table>
+  </section>
+
+  <!--Concluídos-->
+  <section>
+    <h2>Concluídas</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Horario</th>
+          <th>Cliente</th>
+          <th>Tipo</th>
+          <th>Valor restante</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let foto of fotosConcluidas">
+          <td>{{ foto.data | date:'dd/MM/yyyy'  }}</td>
+          <td>{{ foto.horaFormatada }}</td>
+          <td><button (click)="openDialog('Foto', foto)">{{ foto.usuario?.nomeFormatado }}</button></td>
+          <td>{{ foto.tipo }}</td>
+          <td>R$ {{ foto.valorRestante }}</td>
+        </tr>
+      </tbody>
+  </table>
+  </section>
+</main>

@@ -10,3 +10,14 @@
 
 html, body { height: 100vh; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.voltar{
+  background-color: transparent;
+  color: var(--cor-principal);
+  position: relative;
+  border: 0;
+  cursor: pointer;
+  left: 2%;
+  top: 1%;
+}

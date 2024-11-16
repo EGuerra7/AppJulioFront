@@ -1,6 +1,7 @@
+<button [routerLink]="['/administrador']" class="voltar"><mat-icon>arrow_back</mat-icon></button>
 <main>
   <h1>Clientes</h1>
-  <button>Cadastrar cliente</button>
+  <button (click)="openRegisterDialog('Cliente')">Cadastrar cliente</button>
   <table>
       <thead>
         <tr>
@@ -13,7 +14,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let usuario of usuarios">
-          <td>{{ usuario.nome }}</td>
+          <td><button (click)="openDialog('Cliente', usuario)">{{ usuario.nome }}</button></td>
           <td>{{ usuario.apelido }}</td>
           <td>{{ usuario.dataAniversario | date: "dd/MM"}}</td>
           <td>{{ usuario.permissao }}</td>
