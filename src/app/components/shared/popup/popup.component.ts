@@ -11,11 +11,12 @@ import {
 import { CommonModule } from '@angular/common';
 import { Foto } from '../../model/foto.model';
 import { FotosService } from '../../service/fotos.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-popup',
   standalone: true,
-  imports: [ReactiveFormsModule, MatDialogContent, MatDialogActions, CommonModule],
+  imports: [ReactiveFormsModule, MatDialogContent, MatDialogActions, CommonModule, MatIconModule],
   templateUrl: './popup.component.html',
   styleUrl: './popup.component.css'
 })
@@ -49,7 +50,12 @@ export class PopupComponent implements OnInit {
     })
 
     this.fotoForm = new FormGroup({
-      usuario: new FormControl(this.isFoto ? item.usuario : "", Validators.required),
+      usuario: new FormControl(
+        this.isFoto && item.usuario 
+          ? this.listUsuarios.find(usuario => usuario.id === item.usuario.id) 
+          : null,
+        Validators.required
+      ),
       data: new FormControl(this.isFoto ? this.converterParaFormatoDdMmYyyy(item.data) || "" : "", Validators.required),
       horario: new FormControl(this.isFoto ? item.horario || "" : "", Validators.required),
       local: new FormControl(this.isFoto ? item.local || "" : "", Validators.required),
@@ -68,9 +74,33 @@ export class PopupComponent implements OnInit {
     this.buscarUsuarios();
   }
 
+  initializeForm(): void {
+    const item = this.data.item || {};
+  
+    this.fotoForm = new FormGroup({
+      usuario: new FormControl(
+        this.isFoto && item.usuario
+          ? this.listUsuarios.find(usuario => usuario.id === item.usuario.id)
+          : null,
+        Validators.required
+      ),
+      data: new FormControl(this.isFoto ? this.converterParaFormatoDdMmYyyy(item.data) || "" : "", Validators.required),
+      horario: new FormControl(this.isFoto ? item.horario || "" : "", Validators.required),
+      local: new FormControl(this.isFoto ? item.local || "" : "", Validators.required),
+      tipo: new FormControl(this.isFoto ? item.tipo || null : null, Validators.required),
+      valorTotal: new FormControl(this.isFoto ? item.valorTotal || null : null, Validators.required),
+      valorPago: new FormControl(this.isFoto ? item.valorPago || null : null),
+      descricaoPagamento: new FormControl(this.isFoto ? item.descricaoPagamento || "" : "", Validators.required),
+      status: new FormControl(this.isFoto ? item.status || "" : "", Validators.required),
+      linkFoto: new FormControl(this.isFoto ? item.linkFoto || "" : ""),
+      click: new FormControl(this.isFoto ? item.click || null : null, Validators.required)
+    });
+  }
+
   buscarUsuarios() {
     this.usuarioService.listarUsuarios().subscribe(response => {
       this.listUsuarios = response;
+      this.initializeForm();
     }, error => {
       console.log("Erro ao encontrar os usuários!");
     })

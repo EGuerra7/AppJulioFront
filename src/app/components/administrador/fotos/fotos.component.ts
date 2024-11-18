@@ -51,7 +51,7 @@ export class FotosComponent implements OnInit{
 
   openDialog(tipo: string, item?: any, isEdit: boolean = false): void {
     const dialogRef = this.dialog.open(PopupComponent, {
-      width: '90%',
+      width: '99%',
       data: { tipo, item, isEdit: !!item  },
     });
 

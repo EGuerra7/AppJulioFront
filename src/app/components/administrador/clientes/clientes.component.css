@@ -27,7 +27,7 @@ main button{
 }
 
 table {
-  width: 95%;
+  width: 99%;
   border-collapse: collapse;
   table-layout: fixed;
   background-color: var(--cor-secundaria);
@@ -47,14 +47,14 @@ th {
 td {
   padding: 5px;
   text-align: center;
-  font-size: 10px;
+  font-size: 8px;
   color: var(--cor-principal); /* Cor do texto */
 }
 
 /* Bordas verticais entre as células */
 th, td {
   border-right: 1px solid var(--cor-branca);
-  line-height: 12px;
+  line-height: 10px;
 }
 
 /* Remove a última borda vertical */
@@ -90,5 +90,5 @@ tbody button{
   text-align: center;
   width: 100%;
   color: var(--cor-principal);
-  font-size: 10px;
+  font-size: 8px;
 }

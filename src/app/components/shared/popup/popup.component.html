@@ -3,6 +3,8 @@
 
   <h2 *ngIf="data.isEdit">Editar {{ data.tipo }}</h2>
 
+  <button class="delete" *ngIf="data.isEdit"><mat-icon>delete</mat-icon></button>
+
   <!--Usuário-->
   <form [formGroup]="usuarioForm" *ngIf="data.tipo === 'Cliente'">
     <mat-dialog-content>
@@ -69,7 +71,7 @@
         </div>
 
         <div class="form-group">
-          <input type="text" formControlName="descricaoPagamento" id="descricaoPagamento" placeholder="Descricao do pagamento" />
+            <textarea formControlName="descricaoPagamento" id="descricaoPagamento" placeholder="Descricao do pagamento"></textarea>
         </div>
 
         <div class="form-group select">

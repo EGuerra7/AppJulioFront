@@ -62,14 +62,15 @@ th {
 td {
   padding: 5px;
   text-align: center;
-  font-size: 10px;
+  font-size: 8px;
   color: var(--cor-principal);
 }
 
 
 th, td {
   border-right: 1px solid var(--cor-branca);
-  line-height: 12px;
+  line-height: 10px;
+  white-space: normal;
 }
 
 
@@ -93,5 +94,5 @@ tbody button{
   text-align: center;
   width: 100%;
   color: var(--cor-principal);
-  font-size: 10px;
+  font-size: 8px;
 }

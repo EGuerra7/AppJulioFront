@@ -6,11 +6,21 @@ section{
   gap: 1em;
   padding: 10px;
   font-family: var(--fonte);
+  position: relative;
 }
 
 h2{
   color: var(--cor-principal);
   font-weight: 200;
+}
+
+.delete{
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  position: absolute;
+  left: 1%;
+  top: 2%;
 }
 
 mat-dialog-content{
@@ -31,7 +41,7 @@ mat-dialog-content{
 }
 
 .divide_linha input{
-  width: 79%;
+  width: 70%;
 }
 
 .form-container {
@@ -65,12 +75,29 @@ mat-dialog-content{
   padding: 12px;
   border-radius: 15px;
   border: 1.5px solid var(--cor-principal);
-  font-size: 14px;
-  color: #8d6645;
+  font-size: 10px;
+  color: var(--cor-principal);
   outline: none;
   background-color: transparent;
   transition: border-color 0.3s;
   text-align: center;
+}
+
+textarea {
+  resize: none;
+  border: 1.5px solid var(--cor-principal);
+  padding: 12px;
+  border-radius: 15px;
+  font-size: 10px;
+  outline: none;
+  font-family: inherit;
+  text-align: center;
+  color: var(--cor-principal);
+
+  &&::placeholder{
+    color: var(--cor-principal);
+    font-size: 10px;
+  }
 }
 
 .form-group.select{
@@ -85,7 +112,9 @@ mat-dialog-content{
 
 label{
   color: var(--cor-principal);
-  font-size: 15px;
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 
