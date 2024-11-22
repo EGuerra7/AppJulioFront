@@ -2,7 +2,7 @@
 
   <div class="divider"></div>
     <section class="infos" *ngIf="usuario">
-        <h1>{{ usuario?.nome }}</h1>
+        <h1>{{ usuario?.nomeFormatado }}</h1>
         <div class="infos_user">
           <span>
             <img src="../../../assets/niver.svg" alt="imagem de aniversário">
@@ -15,7 +15,8 @@
           </span>
           <span>
             <img src="../../../assets/cupom.svg" alt="imagem de cupom">
-            2 cupons
+            {{ cupons }} cupons
+            <button [routerLink]="['/cupom']" class="cupom_btn">Usar cupons</button>
           </span>
         </div>
         <div class="trabalhos">
@@ -39,7 +40,7 @@
           <span><b>Tipo:</b> {{ foto.tipo }}</span>
           <span><b>Valor Total:</b> R$ {{ foto.valorTotal }}</span>
           <span><b>Valor Pago:</b> R$ {{ foto.valorPago }}</span>
-          <span><b>Valor Restante:</b> R$ {{ foto.valorRestante }}</span>
+          <span><b>Valor Restante:</b> R$ {{ foto.valorRestante }} <b *ngIf="foto.usoCupom">(Cupom utilizado)</b></span>
 
           <app-progress-bar [status]="foto.status ?? 'Agendado'"></app-progress-bar>
         </div>
@@ -55,7 +56,7 @@
           <span><b>Tipo:</b> {{ foto.tipo }}</span>
           <span><b>Valor Total:</b> R$ {{ foto.valorTotal }}</span>
           <span><b>Valor Pago:</b> R$ {{ foto.valorPago }}</span>
-          <span><b>Valor Restante:</b> R$ {{ foto.valorRestante }}</span>
+          <span><b>Valor Restante:</b> R$ {{ foto.valorRestante }} <b *ngIf="foto.usoCupom">(Cupom utilizado)</b></span>
 
           <app-progress-bar [status]="foto.status ?? 'Agendado'"></app-progress-bar>
         </div>
@@ -71,7 +72,7 @@
           <span><b>Tipo:</b> {{ foto.tipo }}</span>
           <span><b>Valor Total:</b> R$ {{ foto.valorTotal }}</span>
           <span><b>Valor Pago:</b> R$ {{ foto.valorPago }}</span>
-          <span><b>Valor Restante:</b> R$ {{ foto.valorRestante }}</span>
+          <span><b>Valor Restante:</b> R$ {{ foto.valorRestante }} <b *ngIf="foto.usoCupom">(Cupom utilizado)</b></span>
 
           <app-progress-bar [status]="foto.status ?? 'Agendado'" [linkFoto]="foto.linkFoto ?? ''"></app-progress-bar>
         </div>

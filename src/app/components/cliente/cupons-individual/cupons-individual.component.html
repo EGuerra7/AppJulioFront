@@ -1,0 +1,16 @@
+<button [routerLink]="['/cliente']" class="voltar"><mat-icon>arrow_back</mat-icon></button>
+<main>
+    <section>
+        <p class="sem_cup" *ngIf="cuponsValidos.length === 0">Não há cupons para usar!</p>
+        <div class="cupom" *ngFor="let cupom of cuponsValidos">
+            <div class="image-container">
+                <img src="../../../assets/CupomLoja.svg" alt="Imagem de um cupom marrom com o valor de desconto">
+                <div class="cupom_txt">
+                    <span>{{ cupom.nome }}</span>
+                    <button (click)="openDialog(cupom, 'Cupom')">Usar Cupom</button>
+                    <p>Válido até: {{ cupom.dataValidade | date: "dd/MM/yyyy" }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

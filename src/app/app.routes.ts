@@ -11,6 +11,7 @@ import { FotosComponent } from './components/administrador/fotos/fotos.component
 import { PortfolioComponent } from './components/administrador/portfolio/portfolio.component';
 import { CuponsComponent } from './components/administrador/cupons/cupons.component';
 import { ClientesComponent } from './components/administrador/clientes/clientes.component';
+import { CuponsIndividualComponent } from './components/cliente/cupons-individual/cupons-individual.component';
 
 export const routes: Routes = [
   {
@@ -59,5 +60,10 @@ export const routes: Routes = [
     path:"cupons",
     component:CuponsComponent,
     canActivate: [AdmAuthService]
+  },
+  {
+    path:"cupom",
+    component: CuponsIndividualComponent,
+    canActivate: [AuthLoginService]
   }
 ];

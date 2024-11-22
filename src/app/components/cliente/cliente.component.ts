@@ -8,6 +8,9 @@ import { Foto } from '../model/foto.model';
 import { ProgressBarComponent } from "../shared/progress-bar/progress-bar.component";
 import { UsuarioService } from '../service/usuario.service';
 import { MatIconModule } from '@angular/material/icon';
+import { CupomService } from '../service/cupom.service';
+import { response } from 'express';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -15,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-cliente',
   standalone: true,
-  imports: [DatePipe, CommonModule, ProgressBarComponent, MatIconModule],
+  imports: [DatePipe, CommonModule, ProgressBarComponent, MatIconModule, RouterModule],
   templateUrl: './cliente.component.html',
   styleUrl: './cliente.component.css',
   providers: [DatePipe]
@@ -25,13 +28,14 @@ export class ClienteComponent implements OnInit{
   usuario: any;
   trabalhos!: StatusTrabalho;
   diasRestantes!: number;
+  cupons:number = 0;
 
   fotos: Foto[] = [];
   fotosAgendadas: Foto[] = [];
   fotosEmAndamento: Foto[] = [];
   fotosConcluidas: Foto[] = [];
 
-  constructor(private loginService: LoginService, private fotosService: FotosService, private usuarioService: UsuarioService, private datePipe: DatePipe){
+  constructor(private loginService: LoginService, private fotosService: FotosService, private usuarioService: UsuarioService, private cupomService: CupomService , private datePipe: DatePipe){
 
   }
 
@@ -48,8 +52,10 @@ export class ClienteComponent implements OnInit{
                 this.usuario = response;
 
                 if (this.usuario && this.usuario.id) {
-                    // Chama buscarFotosIndividual() após obter o usuário
+                    
+                  this.usuario.nomeFormatado = this.formatarNome(this.usuario.nome);
                     this.buscarFotosIndividual();
+                    this.cuponsInd();
 
                     // Obtém o status do trabalho
                     this.fotosService.statusTrabalho(this.usuario.id!).subscribe(
@@ -103,6 +109,18 @@ buscarFotosIndividual() {
 }
 
 
+cuponsInd(){
+  if (this.usuario && this.usuario.id) {
+    this.cupomService.ContagemCuponsInd(this.usuario).subscribe(response => {
+      this.cupons = response;
+    },
+    (error) => {
+        console.error("Erro ao carregar: " + error);
+    })
+  }
+}
+
+
   calcularDiasRestantes(dataAniversario: string): void {
     const dataAtual = new Date();
     const aniversario = new Date(dataAniversario);
@@ -125,6 +143,18 @@ buscarFotosIndividual() {
 
      // Agora o DatePipe consegue formatar a hora
      return this.datePipe.transform(horarioDate, 'HH:mm') || '';
+  }
+
+  formatarNome(nomeCompleto: string): string {
+    if (!nomeCompleto) {
+      return ""; // Retorna vazio se o nome não for fornecido
+    }
+
+    const partes = nomeCompleto.trim().split(" ");
+    const primeiroNome = partes[0]; // Primeiro nome
+    const ultimoSobrenome = partes[partes.length - 1]; // Último sobrenome
+
+    return `${primeiroNome} ${ultimoSobrenome}`;
   }
 
 

@@ -1,1 +1,23 @@
 <button [routerLink]="['/administrador']" class="voltar"><mat-icon>arrow_back</mat-icon></button>
+<main>
+    <h1>Cupons</h1>
+    <button (click)="openRegisterDialog('Cupom')">Cadastrar novos cupons</button>
+    <table>
+        <thead>
+          <tr>
+            <th>Cupom</th>
+            <th>Valor</th>
+            <th>Data de validade</th>
+            <th>Clicks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cupom of cupons">
+            <td><button (click)="openDialog('Cupom', cupom)">{{ cupom.nome }}</button></td>
+            <td>R$ {{ cupom.valor }}</td>
+            <td>{{ cupom.dataValidade | date: "dd/MM/yyyy"}}</td>
+            <td>{{ cupom.valorClick }} clicks</td>
+          </tr>
+        </tbody>
+    </table>
+  </main>

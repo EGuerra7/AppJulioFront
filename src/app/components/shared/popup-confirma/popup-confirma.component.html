@@ -1,0 +1,28 @@
+<section>
+    <div *ngIf="isCompra">
+      <h2>Você deseja comprar o {{ data.item.nome }}?</h2>
+      <mat-dialog-actions class="acoes">
+          <button class="sair" (click)="onNoClick()">Cancelar</button>
+          <button class="cadastrar" (click)="comprar()">Confirmar</button>
+      </mat-dialog-actions>
+      <p>Válido até: {{ data.item.dataValidade | date:'dd/MM/yyyy' }}</p>
+    </div>
+    <div *ngIf="isCupom">
+      <h2>Escolha a foto</h2>
+      <div>
+        <p class="sem_cup" *ngIf="fotosSemCupom.length === 0">Não há foto para usar o cupom!</p>
+          <div *ngFor="let foto of fotosSemCupom" class="box_fotos">
+            <div class="foto_disc">
+              <span><b>Data:</b> {{ foto.data | date:'dd/MM/yyyy' }}</span>
+              <span><b>Horário:</b> {{ foto.horaFormatada  }}</span>
+              <span><b>Local:</b> {{ foto.local }}</span>
+              <span><b>Tipo:</b> {{ foto.tipo }}</span>
+              <span><b>Valor Total:</b> R$ {{ foto.valorTotal }}</span>
+              <span><b>Valor Pago:</b> R$ {{ foto.valorPago }}</span>
+              <span><b>Valor Restante:</b> R$ {{ foto.valorRestante }} <b *ngIf="foto.usoCupom">(Cupom utilizado)</b></span>
+            </div>
+            <button (click)="usar(foto)">Usar Cupom</button>  
+          </div>
+      </div>
+    </div>
+</section>

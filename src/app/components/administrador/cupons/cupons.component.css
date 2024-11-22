@@ -1,0 +1,94 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3em;
+    margin-top: 1em;
+    font-family: var(--fonte);
+  }
+  
+  main h1{
+    color: var(--cor-principal);
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  main button{
+    background-color: var(--cor-principal);
+    width: 95%;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    color: var(--cor-secundaria);
+    font-size: 15px;
+    cursor: pointer;
+  }
+  
+  table {
+    width: 99%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: var(--cor-secundaria);
+    text-align: center;
+  }
+  
+  /* Estilo para cabeçalho */
+  th {
+    background-color: var(--cor-principal); /* Cor de fundo do cabeçalho */
+    color: var(--cor-secundaria); /* Cor do texto do cabeçalho */
+    padding: 5px;
+    font-size: 10px;
+    text-align: center;
+  }
+  
+  /* Estilo para células de dados */
+  td {
+    padding: 5px;
+    text-align: center;
+    font-size: 8px;
+    color: var(--cor-principal); /* Cor do texto */
+  }
+  
+  /* Bordas verticais entre as células */
+  th, td {
+    border-right: 1px solid var(--cor-branca);
+    line-height: 10px;
+  }
+  
+  /* Remove a última borda vertical */
+  th:last-child, td:last-child {
+    border-right: none;
+  }
+  
+  /* Bordas horizontais */
+  tr {
+    border-bottom: 1px solid var(--cor-branca);
+  }
+  
+  tr:last-child {
+    border-bottom: none;
+  }
+  
+  th:nth-child(1), td:nth-child(1) {
+    width: 35%; /* Ajuste o valor conforme necessário */
+  }
+  
+  /* Ajustes para as outras colunas para distribuir o espaço */
+  th:nth-child(2), td:nth-child(2),
+  th:nth-child(3), td:nth-child(3),
+  th:nth-child(4), td:nth-child(4) {
+    width: 23%; /* Ajuste o valor conforme necessário */
+  }
+  
+  
+  tbody button{
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    color: var(--cor-principal);
+    font-size: 8px;
+  }
+  

@@ -3,7 +3,7 @@
 
   <h2 *ngIf="data.isEdit">Editar {{ data.tipo }}</h2>
 
-  <button class="delete" *ngIf="data.isEdit"><mat-icon>delete</mat-icon></button>
+  <button class="delete" *ngIf="data.isEdit && data.tipo === 'Foto'"><mat-icon>delete</mat-icon></button>
 
   <!--Usuário-->
   <form [formGroup]="usuarioForm" *ngIf="data.tipo === 'Cliente'">
@@ -21,6 +21,9 @@
         </div>
         <div class="form-group">
           <input type="text" id="niver" formControlName="dataAniversario" placeholder="Data de aniversário"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="telefone" formControlName="telefone" placeholder="telefone"/>
         </div>
 
         <div class="form-group select">
@@ -92,6 +95,26 @@
         </div>
 
 
+    </mat-dialog-content>
+  </form>
+
+  <!--Cupom-->
+  <form [formGroup]="cupomForm" *ngIf="data.tipo === 'Cupom'">
+    <mat-dialog-content>
+        <div class="form-group">
+          <input type="text" formControlName="nome" id="nome" placeholder="Nome" />
+        </div>
+
+        <div class="form-group">
+          <input type="text" formControlName="valor" id="valor" placeholder="Valor Real" />
+        </div>
+
+        <div class="form-group">
+          <input type="text" id="valorClicks" formControlName="valorClick" placeholder="Valor de Clicks"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="Data de Validade" formControlName="dataValidade" placeholder="Data de Validade"/>
+        </div>
     </mat-dialog-content>
   </form>
 

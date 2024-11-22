@@ -1,1 +1,15 @@
-<p>loja works!</p>
+<main>
+    <h2>Loja</h2>
+    <section>
+        <div class="cupom" *ngFor="let cupom of cupons">
+            <div class="image-container">
+                <img src="../../../assets/CupomLoja.svg" alt="Imagem de um cupom marrom com o valor de desconto">
+                <span><b>R$ {{ cupom.valor }}</b><br>de desconto</span>
+            </div>
+            <div class="clicks">
+                <span>{{ cupom.valorClick }}  clicks</span>
+                <button  (click)="openDialog(cupom, 'Compra')">Comprar</button>
+            </div>
+        </div>
+    </section>
+</main>

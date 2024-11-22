@@ -1,0 +1,139 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--fonte);
+}
+
+section{
+    width: 95%;
+}
+
+h2{
+  color: var(--cor-principal);
+}
+
+.cupom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.image-container {
+    position: relative;
+    width: 50%;
+    height: 100px;
+    max-width: 400px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .image-container img {
+    width: 100%; /* Faz a imagem ocupar a largura total do container */
+    height: 100%; /* Mantém a proporção da imagem */
+  }
+
+  .image-container span {
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 43%;
+    transform: translate(-50%, -50%);
+    color: var(--cor-secundaria);
+    font-size: 19px;
+    text-align: center;
+    line-height: 15px;
+  }
+
+  .data{
+    font-size: 8px;
+    margin: 0;
+  }
+
+  .clicks{
+    display: flex;
+    width: 40%;
+    gap: 6px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .clicks span{
+    font-size: 18px;
+    color: black;
+  }
+
+  .clicks button{
+    border: 0;
+    background-color: var(--cor-principal);
+    width: 90%;
+    color: var(--cor-secundaria);
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  @media (width <= 345px){
+    .image-container span{
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    .clicks button{
+        padding: 2px;
+    }
+  }
+
+  @media (width <= 420px){
+    .image-container span{
+        font-size: 15px;
+    }
+
+    .clicks button{
+        padding: 5px;
+    }
+  }
+
+  @media (width >= 700px){
+    main{
+        gap: 3em;
+    }
+    section{
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+    }
+
+    .image-container span{
+        font-size: 25px;
+        line-height: 25px;
+    }
+
+    .clicks button{
+        font-size: 20px;
+    }
+
+    .clicks span{
+        font-size: 25px;
+    }
+  }
+  @media(width >= 1100px){
+    h2{
+      display: none;
+    }
+  }
+
+  @media (width >= 1400px){
+    .cupom{
+        justify-content: center;
+        gap: 10%;
+    }
+    .clicks{
+        width: 20%;
+    }
+  }
+
+ 

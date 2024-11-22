@@ -16,4 +16,5 @@ export class Foto{
   status?: string;
   linkFoto?: string;
   click?: number;
+  usoCupom?: boolean;
 }

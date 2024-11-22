@@ -7,4 +7,5 @@ export class Usuario{
   permissao?: string;
   clicks?: number;
   dataAniversario?: string;
+  telefone?: string;
 }
