@@ -1,3 +1,4 @@
+import { Feedback } from './../../model/feedback.model';
 import { Usuario } from './../../model/usuario.model';
 import { UsuarioService } from './../../service/usuario.service';
 import { Component, Inject, inject, OnInit } from '@angular/core';
@@ -14,6 +15,9 @@ import { FotosService } from '../../service/fotos.service';
 import { MatIconModule } from '@angular/material/icon';
 import { CupomService } from '../../service/cupom.service';
 import { Cupom } from '../../model/cupom.model';
+import { Portifolio } from '../../model/portifolio.model';
+import { PortifolioService } from '../../service/portifolio.service';
+import { FeedbackService } from '../../service/feedback.service';
 
 @Component({
   selector: 'app-popup',
@@ -24,18 +28,27 @@ import { Cupom } from '../../model/cupom.model';
 })
 export class PopupComponent implements OnInit {
   listUsuarios: Usuario[] = [];
+
   usuarioForm!: FormGroup;
   fotoForm!: FormGroup;
   cupomForm!: FormGroup;
+  portifolioForm!: FormGroup;
+  feedbackForm!: FormGroup;
 
   isCliente!: boolean;
   isFoto!: boolean;
   isCupom!: boolean;
+  isPort!: boolean;
+  isFeed!: boolean;
+
+  notaSelecionada: number = 0;
 
 
   constructor(private usuarioService: UsuarioService,
     private fotoService: FotosService,
     private cupomService: CupomService,
+    private portifoliService: PortifolioService,
+    private feedbackService: FeedbackService,
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { tipo: string, item?: any, isEdit: boolean },
   ) {
@@ -43,6 +56,8 @@ export class PopupComponent implements OnInit {
     this.isCliente = this.data.tipo === 'Cliente';
     this.isFoto = this.data.tipo === 'Foto';
     this.isCupom = this.data.tipo === 'Cupom';
+    this.isPort = this.data.tipo === 'Portifólio';
+    this.isFeed = this.data.tipo === 'Feedback';
 
     const item = this.data.item || {};
 
@@ -83,6 +98,23 @@ export class PopupComponent implements OnInit {
       dataValidade: new FormControl(this.isCupom ? this.converterParaFormatoDdMmYyyy(item.dataValidade) || "" : "", Validators.required)
     })
 
+    this.portifolioForm = new FormGroup({
+      url: new FormControl(this.isPort ? item.url || "" : "", Validators.required)
+    })
+
+    const dataAtual = new Date();
+
+    this.feedbackForm = new FormGroup({
+      cliente: new FormControl(this.isFeed && item.cliente
+        ? this.listUsuarios.find(cliente => cliente.id === item.cliente.id)
+        : null
+      ),
+      texto: new FormControl("", Validators.required),
+      nota: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(5)]),
+      data: new FormControl (dataAtual),
+      ativo: new FormControl(false)
+    })
+
   }
 
   ngOnInit(): void {
@@ -108,8 +140,22 @@ export class PopupComponent implements OnInit {
       descricaoPagamento: new FormControl(this.isFoto ? item.descricaoPagamento || "" : "", Validators.required),
       status: new FormControl(this.isFoto ? item.status || "" : "", Validators.required),
       linkFoto: new FormControl(this.isFoto ? item.linkFoto || "" : ""),
-      click: new FormControl(this.isFoto ? item.click || null : null, Validators.required)
+      click: new FormControl(this.isFoto ? item.click || null : null, Validators.required),
+      usuCupom: new FormControl (this.isFoto ? item.click || false : false)
     });
+
+    const dataAtual = new Date();
+
+    this.feedbackForm = new FormGroup({
+      cliente: new FormControl(this.isFeed && item
+        ? this.listUsuarios.find(cliente => cliente.id === item.id)
+        : null
+      ),
+      texto: new FormControl("", Validators.required),
+      nota: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(5)]),
+      data: new FormControl (dataAtual),
+      ativo: new FormControl(false)
+    })
   }
 
   buscarUsuarios() {
@@ -135,6 +181,12 @@ export class PopupComponent implements OnInit {
       } else if(this.data.tipo === "Cupom"){
         this.criarCupom();
 
+      } else if(this.data.tipo === "Portifólio"){
+        this.adicionarPortifolio();
+        
+      } else if(this.data.tipo === "Feedback"){
+        this.adicionarFeedback();
+        
       } else {
         alert("Insira todos os itens necessários!");
       }
@@ -224,7 +276,6 @@ export class PopupComponent implements OnInit {
       };
 
       if (this.data.isEdit) {
-        // Edição de usuário
         const dadosComId = {
           ...dadosParaEnviar,
           id: this.data.item.id
@@ -246,10 +297,68 @@ export class PopupComponent implements OnInit {
   }}
   }
 
+  adicionarPortifolio(){
+    if(this.portifolioForm.valid){
+      const portifolio: Portifolio = this.portifolioForm.value;
+
+      if (this.data.isEdit) {
+        const dadosComId = {
+          ...portifolio,
+          id: this.data.item.id
+        };
+
+        this.portifoliService.editarFoto(dadosComId).subscribe(() => {
+          alert("Foto Alterada!");
+          this.dialogRef.close();
+        }, () => {
+          alert("erro!");
+        })
+      } else {
+        this.portifoliService.salvarFoto(portifolio).subscribe(() => {
+          alert("Foto adicionada com sucesso");
+          this.dialogRef.close();
+        }, error => {
+          console.log("Erro!" + JSON.stringify(error));
+        })
+      }
+
+    }
+  }
+
+  adicionarFeedback(){
+    if(this.feedbackForm.valid){
+      const feedback: Feedback = this.feedbackForm.value;
+
+      this.feedbackService.salvarFeed(feedback).subscribe(() => {
+        alert("Feedback enviado para aprovação!");
+        this.dialogRef.close();
+      }, () => {
+        alert("erro!");
+      });
+
+    }
+  }
+
+  deletarFoto(foto: Foto){
+    this.fotoService.deletarFoto(foto).subscribe(response => {
+      if(response = true){
+        alert("Foto deletada com sucesso!");
+        this.dialogRef.close();
+      } else {
+        alert("Erro ao deletar!");
+      }
+    })
+  }
+
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  setNota(nota: number): void {
+    this.feedbackForm.controls['nota'].setValue(nota); 
+  }
+
 
 
   converterParaFormatoDdMmYyyy(data: string | Date): string {

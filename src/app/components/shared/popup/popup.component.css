@@ -23,6 +23,11 @@ h2{
   top: 2%;
 }
 
+
+form{
+  width: 100%;
+}
+
 mat-dialog-content{
   width: 100% !important;
 }
@@ -149,6 +154,18 @@ label{
 
 .sair{
   background-color: red;
+}
+
+.estrela-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.estrela-container span{
+  color: var(--cor-principal);
+  font-size: 10px;
 }
 
 

@@ -1,1 +1,22 @@
-<p>feedbacks works!</p>
+<main>
+    <div class="titulo">
+        <h1>Feedbacks</h1>
+        <button *ngIf="usuario.permissao === 'Cliente'" (click)="OpenDialog('Feedback')">Adicione um feedback</button>
+    </div>
+    <section>
+        <div class="box_feed" *ngFor="let feed of feedbacks">
+            <div class="box_info">
+                <span class="info_nome">{{ feed.cliente?.nomeFormatado }}</span>
+                <span class="info_data">{{ feed.data | date:'dd/MM/yyyy' }}</span>
+            </div>
+            <p>{{ feed.texto }}</p>
+            <div class="rating">
+                <img class="estrelas" *ngFor="let star of stars; let i = index"
+                    [src]="i < feed.nota! ? '../../../assets/estrela-preenchida.svg' : '../../../assets/estrela.svg'"
+                     alt="estrela"
+                     >            
+            </div>
+            <img class="galantis" src="../../../assets/galantis.svg" alt="logo da galantis"> 
+        </div>
+    </section>
+</main>

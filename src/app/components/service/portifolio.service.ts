@@ -15,4 +15,17 @@ export class PortifolioService {
   public listarFotos(): Observable<Portifolio[]>{
     return this.http.get<Portifolio[]>(this.API);
   }
+
+  public salvarFoto(foto: Portifolio): Observable<Portifolio>{
+    return this.http.post<Portifolio>(this.API, foto);
+  }
+  
+  public editarFoto(foto: Portifolio): Observable<Portifolio>{
+    return this.http.put<Portifolio>(this.API, foto);
+  }
+  
+  public deletarFoto(foto: Portifolio): Observable<boolean>{
+    return this.http.delete<boolean>(this.API + "/" + foto.id);
+  }
+
 }

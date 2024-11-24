@@ -34,4 +34,9 @@ export class FotosService {
   public statusTrabalho(usuarioId: number): Observable<StatusTrabalho> {
     return this.http.get<StatusTrabalho>(this.API + "/status/" + usuarioId);
   }
+  
+  public deletarFoto(foto: Foto): Observable<boolean> {
+    return this.http.delete<boolean>(this.API + "/" + foto.id);
+  }
+
 }

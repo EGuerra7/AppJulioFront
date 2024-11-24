@@ -1,1 +1,16 @@
 <button [routerLink]="['/administrador']" class="voltar"><mat-icon>arrow_back</mat-icon></button>
+<main>
+    <h1>Portifólio</h1>
+  <button class="add" (click)="openRegisterDialog('Portifólio')">Adicionar uma nova foto</button>
+
+  <section>
+    <div class="box_img" *ngFor="let image of images">
+        <img
+        [src]="image.src">
+        <div class="acoes">
+            <button (click)=" openDialog('Portifólio', image)" class="btn_acoes"><mat-icon>edit</mat-icon></button>
+            <button (click)="deletarFoto(image)" class="btn_acoes"><mat-icon>delete</mat-icon></button>
+        </div>
+    </div>
+  </section>
+</main>

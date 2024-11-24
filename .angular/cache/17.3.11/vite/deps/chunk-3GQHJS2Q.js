@@ -4716,6 +4716,8 @@ export {
   A11yModule,
   Directionality,
   BidiModule,
-  MatCommonModule
+  MatCommonModule,
+  MatRipple,
+  _MatInternalFormField
 };
-//# sourceMappingURL=chunk-V2DKZKR3.js.map
+//# sourceMappingURL=chunk-3GQHJS2Q.js.map

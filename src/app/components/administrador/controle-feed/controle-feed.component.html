@@ -1,0 +1,20 @@
+<main>
+    <h1>Feedbacks</h1>
+    <section>
+        <div class="box_feed" *ngFor="let feed of feedbacks">
+            <div class="box_info">
+                <span class="info_nome">{{ feed.cliente?.nomeFormatado }}</span>
+                <span class="info_data">{{ feed.data | date:'dd/MM/yyyy' }}</span>
+                <mat-slide-toggle class="btn_ativo" [checked]="feed.ativo" (change)="ativo(feed, $event)"></mat-slide-toggle>
+            </div>
+            <p>{{ feed.texto }}</p>
+            <div class="rating">
+                <img class="estrelas" *ngFor="let star of stars; let i = index"
+                    [src]="i < feed.nota! ? '../../../assets/estrela-preenchida.svg' : '../../../assets/estrela.svg'"
+                     alt="estrela"
+                     >            
+            </div>
+            <img class="galantis" src="../../../assets/galantis.svg" alt="logo da galantis"> 
+        </div>
+    </section>
+</main>

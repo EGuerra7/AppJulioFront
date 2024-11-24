@@ -35,6 +35,8 @@ export class AdministradorComponent implements OnInit{
         this.usuarioService.listarIndividual(usuarioLogin!).subscribe(
             (response) => {
                 this.usuario = response;
+
+                this.usuario.nomeFormatado = this.formatarNome(this.usuario.nome);
             }, (erro) => {
               console.log(erro);
             });
@@ -44,6 +46,18 @@ export class AdministradorComponent implements OnInit{
 
     }
 
+
+    formatarNome(nomeCompleto: string): string {
+      if (!nomeCompleto) {
+        return ""; // Retorna vazio se o nome não for fornecido
+      }
+  
+      const partes = nomeCompleto.trim().split(" ");
+      const primeiroNome = partes[0]; // Primeiro nome
+      const ultimoSobrenome = partes[partes.length - 1]; // Último sobrenome
+  
+      return `${primeiroNome} ${ultimoSobrenome}`;
+    }
 
   logout(){
     this.loginService.logout();

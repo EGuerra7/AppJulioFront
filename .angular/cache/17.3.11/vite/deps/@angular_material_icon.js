@@ -1,6 +1,6 @@
 import {
   MatCommonModule
-} from "./chunk-V2DKZKR3.js";
+} from "./chunk-3GQHJS2Q.js";
 import {
   DomSanitizer
 } from "./chunk-AHDKDJTC.js";

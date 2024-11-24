@@ -3,7 +3,7 @@
 
   <h2 *ngIf="data.isEdit">Editar {{ data.tipo }}</h2>
 
-  <button class="delete" *ngIf="data.isEdit && data.tipo === 'Foto'"><mat-icon>delete</mat-icon></button>
+  <button (click)="deletarFoto(data.item)" class="delete" *ngIf="data.isEdit && data.tipo === 'Foto'"><mat-icon>delete</mat-icon></button>
 
   <!--Usuário-->
   <form [formGroup]="usuarioForm" *ngIf="data.tipo === 'Cliente'">
@@ -114,6 +114,34 @@
         </div>
         <div class="form-group">
           <input type="text" id="Data de Validade" formControlName="dataValidade" placeholder="Data de Validade"/>
+        </div>
+    </mat-dialog-content>
+  </form>
+
+  <!--Portifólio-->
+  <form [formGroup]="portifolioForm" *ngIf="data.tipo === 'Portifólio'">
+    <mat-dialog-content>
+        <div class="form-group">
+          <input type="text" formControlName="url" id="url" placeholder="Url da foto" />
+        </div>
+    </mat-dialog-content>
+  </form>
+
+  <!--Feedback-->
+  <form [formGroup]="feedbackForm" *ngIf="data.tipo === 'Feedback'">
+    <mat-dialog-content>
+        <div class="form-group">
+          <textarea formControlName="texto" id="texto" placeholder="Escreva aqui!" ></textarea>
+        </div>
+        <div class="estrela-container">
+          <span>Avalie</span>
+           <div>
+              <img class="estrelas" 
+                  *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                  [src]="i < feedbackForm.controls['nota'].value ? '../../../assets/estrela-preenchida.svg' : '../../../assets/estrela.svg'"
+                  alt="estrela"
+                  (click)="setNota(i + 1)">
+            </div>
         </div>
     </mat-dialog-content>
   </form>

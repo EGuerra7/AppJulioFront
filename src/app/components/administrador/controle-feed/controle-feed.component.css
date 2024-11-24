@@ -7,37 +7,19 @@ main{
     font-family: var(--fonte);
 }
 
-.titulo{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 92%;
-    margin-bottom: 2em;
-}
-
-.titulo button{
-    background-color: var(--cor-principal);
-    color: var(--cor-secundaria);
-    border: 0;
-    border-radius: 10px;
-    padding:  3px 10px;
-    font-family: var(--fonte);
-}
-
 main h1{
     color: var(--cor-principal);
     font-size: 18px;
-    margin: 0;
+    margin-bottom: 2em;
 }
 
 section{
     width: 100%;
-    gap: 1.5em;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1.5em;
 }
 
 
@@ -51,6 +33,12 @@ section{
     color: var(--cor-principal);
     position: relative;
     padding: 2%;
+}
+
+.btn_ativo{
+    position: absolute;
+    right: 5%;
+    top: 6%;
 }
 
 .box_feed .estrelas{
@@ -90,4 +78,3 @@ section{
     width: 24px;
     height: 24px;
   }
-  
