@@ -1,11 +1,12 @@
 import { FeedbackService } from './../service/feedback.service';
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Feedback } from '../model/feedback.model';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../shared/popup/popup.component';
 import { LoginService } from '../service/login.service';
 import { UsuarioService } from '../service/usuario.service';
+
 
 @Component({
   selector: 'app-feedbacks',
@@ -24,8 +25,8 @@ export class FeedbacksComponent implements OnInit{
 
   constructor(private feedbackService: FeedbackService, private loginService: LoginService, private usuarioService: UsuarioService){}
   
-  ngOnInit(): void {
-    this.buscarFeeds();
+  async ngOnInit() {
+    await this.buscarFeeds();
   }
 
   OpenDialog(tipo: string): void {
@@ -41,7 +42,7 @@ export class FeedbacksComponent implements OnInit{
     });
   }
 
-  buscarFeeds(){
+  async buscarFeeds(){
     this.feedbackService.listarFeeds().subscribe(response => {
       this.feedbacks = response.filter(feed => feed.ativo);
 
@@ -50,7 +51,6 @@ export class FeedbacksComponent implements OnInit{
           feed.cliente.nomeFormatado = this.formatarNome(feed.cliente.nome);
         }
       });
-
       this.buscarUsuario();
     }, () => {
       console.log("erro!");
@@ -84,9 +84,6 @@ export class FeedbacksComponent implements OnInit{
 
     return `${primeiroNome} ${ultimoSobrenome}`;
   }
-
-
-
 
 
 

@@ -2,9 +2,9 @@
 
   <div class="divider"></div>
     <section class="infos" *ngIf="usuario">
-        <h1>{{ usuario?.nomeFormatado }}</h1>
+        <h1 class="anima">{{ usuario?.nomeFormatado }}</h1>
         <div class="infos_user">
-          <span>
+          <span >
             <img src="../../../assets/niver.svg" alt="imagem de aniversário">
             {{ usuario.dataAniversario | date:'dd/MM' }} <b>(Faltam {{ diasRestantes }} dias para o seu aniversário)</b>
           </span>

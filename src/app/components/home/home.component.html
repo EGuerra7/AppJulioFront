@@ -1,13 +1,15 @@
 
 <main class="imagens">
-  <div class="image-container">
-    <div *ngFor="let image of images">
-      <img
-        [src]="image.src"
-        alt="Random Image"
-        class="random-image"
-      />
+  <div class="anima_image">
+    <div class="image-container">
+      <div class="image" *ngFor="let image of images$ | async as list">
+        <img
+          [src]="image.src"
+          alt="Random Image"
+          class="random-image"
+        />
 
+      </div>
     </div>
   </div>
 </main>

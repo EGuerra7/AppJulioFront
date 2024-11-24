@@ -2,6 +2,8 @@ import { PortifolioService } from './../service/portifolio.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Portifolio } from '../model/portifolio.model';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Component({
   selector: 'app-home',
@@ -11,31 +13,46 @@ import { Portifolio } from '../model/portifolio.model';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements	OnInit{
-  images: { src: string; }[] = [];
+  images$ = new BehaviorSubject<{ src: string }[]>([]);
   fotosWeb: Portifolio[] = [];
 
-  constructor(public portifolioService: PortifolioService){}
+  constructor(public portifolioService: PortifolioService) {}
 
-  ngOnInit() {
-    this.loadImages();
+  async ngOnInit() {
+    await this.loadImages();
   }
 
-
-  loadImages() {
-
+  async loadImages() {
     this.portifolioService.listarFotos().subscribe(
       (response) => {
         this.fotosWeb = response;
 
-        this.images = this.fotosWeb
+        const shuffledImages = this.fotosWeb
           .map((foto) => ({
-            src: `https://i.ibb.co/${foto.url}` //
+            src: `https://i.ibb.co/${foto.url}`,
           }))
           .sort(() => Math.random() - 0.5);
+
+        this.images$.next(shuffledImages); // Atualiza o Observable
+
+        this.initScrollReveal();
       },
       (error) => {
-        console.log("Erro ao carregar as URLs: " + error);
+        console.log('Erro ao carregar as URLs: ' + error);
       }
     );
+  }
+
+  async initScrollReveal() {
+    if (typeof window !== 'undefined') {
+      const ScrollReveal = (await import('scrollreveal')).default;
+  
+      const sr = ScrollReveal({
+        distance: '20px',
+        duration: 1000,
+      });
+  
+      sr.reveal('.image', { origin: 'left', interval: 600, delay: 300});
+    }
   }
 }
