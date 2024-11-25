@@ -1,7 +1,7 @@
 <main>
     <div class="titulo">
         <h1>Feedbacks</h1>
-        <button *ngIf="usuario.permissao === 'Cliente'" (click)="OpenDialog('Feedback')">Adicione um feedback</button>
+        <button *ngIf="usuario?.permissao === 'Cliente'" (click)="OpenDialog('Feedback')">Adicione um feedback</button>
     </div>
     <section class="feed_section">
         <div class="box_feed" *ngFor="let feed of feedbacks">
