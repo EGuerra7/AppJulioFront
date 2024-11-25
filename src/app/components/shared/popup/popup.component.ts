@@ -18,6 +18,7 @@ import { Cupom } from '../../model/cupom.model';
 import { Portifolio } from '../../model/portifolio.model';
 import { PortifolioService } from '../../service/portifolio.service';
 import { FeedbackService } from '../../service/feedback.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-popup',
@@ -49,6 +50,7 @@ export class PopupComponent implements OnInit {
     private cupomService: CupomService,
     private portifoliService: PortifolioService,
     private feedbackService: FeedbackService,
+    private toastr: ToastrService,
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { tipo: string, item?: any, isEdit: boolean },
   ) {
@@ -73,8 +75,8 @@ export class PopupComponent implements OnInit {
 
     this.fotoForm = new FormGroup({
       usuario: new FormControl(
-        this.isFoto && item.usuario 
-          ? this.listUsuarios.find(usuario => usuario.id === item.usuario.id) 
+        this.isFoto && item.usuario
+          ? this.listUsuarios.find(usuario => usuario.id === item.usuario.id)
           : null,
         Validators.required
       ),
@@ -111,7 +113,7 @@ export class PopupComponent implements OnInit {
       ),
       texto: new FormControl("", Validators.required),
       nota: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(5)]),
-      data: new FormControl (dataAtual),
+      data: new FormControl(dataAtual),
       ativo: new FormControl(false)
     })
 
@@ -123,7 +125,7 @@ export class PopupComponent implements OnInit {
 
   initializeForm(): void {
     const item = this.data.item || {};
-  
+
     this.fotoForm = new FormGroup({
       usuario: new FormControl(
         this.isFoto && item.usuario
@@ -141,7 +143,7 @@ export class PopupComponent implements OnInit {
       status: new FormControl(this.isFoto ? item.status || "" : "", Validators.required),
       linkFoto: new FormControl(this.isFoto ? item.linkFoto || "" : ""),
       click: new FormControl(this.isFoto ? item.click || null : null, Validators.required),
-      usuCupom: new FormControl (this.isFoto ? item.click || false : false)
+      usuCupom: new FormControl(this.isFoto ? item.click || false : false)
     });
 
     const dataAtual = new Date();
@@ -153,7 +155,7 @@ export class PopupComponent implements OnInit {
       ),
       texto: new FormControl("", Validators.required),
       nota: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(5)]),
-      data: new FormControl (dataAtual),
+      data: new FormControl(dataAtual),
       ativo: new FormControl(false)
     })
   }
@@ -175,25 +177,25 @@ export class PopupComponent implements OnInit {
     if (this.data.tipo === "Cliente") {
       this.criarCliente();
 
-     } else if (this.data.tipo === "Foto") {
+    } else if (this.data.tipo === "Foto") {
       this.criarFoto();
 
-      } else if(this.data.tipo === "Cupom"){
-        this.criarCupom();
+    } else if (this.data.tipo === "Cupom") {
+      this.criarCupom();
 
-      } else if(this.data.tipo === "Portifólio"){
-        this.adicionarPortifolio();
-        
-      } else if(this.data.tipo === "Feedback"){
-        this.adicionarFeedback();
-        
-      } else {
-        alert("Insira todos os itens necessários!");
-      }
+    } else if (this.data.tipo === "Portifólio") {
+      this.adicionarPortifolio();
+
+    } else if (this.data.tipo === "Feedback") {
+      this.adicionarFeedback();
+
+    } else {
+      this.showError("Insira todos os itens necessários!");
     }
+  }
 
 
-  criarCliente(){
+  criarCliente() {
     if (this.usuarioForm.valid) {
       const cliente: Usuario = this.usuarioForm.value;
       const dataFormatada = this.converterDataParaFormatoBackend(cliente.dataAniversario!);
@@ -211,27 +213,27 @@ export class PopupComponent implements OnInit {
         };
 
         this.usuarioService.editarUsuario(dadosComId).subscribe(() => {
-          alert("Usuário " + cliente.nome + " editado!");
+          this.showSuccess("Usuário " + cliente.nome + " editado!");
           this.dialogRef.close();
-        }, erro => {
-          alert("Erro ao editar! " + erro);
+        }, () => {
+          this.showError("Erro ao editar!");
         });
       } else {
         // Cadastro de usuário
         this.usuarioService.cadastrarUsuario(dadosParaEnviar).subscribe(response => {
-          alert("Usuário cadastrado com sucesso!");
+          this.showSuccess("Usuário cadastrado com sucesso!");
           this.dialogRef.close();
-        }, erro => {
-          alert("Erro! " + erro);
+        }, () => {
+          this.showError("Erro!");
         });
       }
     } else {
-      alert("Cadastre todos os itens necessários!");
+      this.showError("Cadastre todos os itens necessários!");
     }
   }
 
 
-  criarFoto(){
+  criarFoto() {
     if (this.fotoForm.valid) {
       const foto: Foto = this.fotoForm.value;
       const dataFormatada = this.converterDataParaFormatoBackend(foto.data!);
@@ -251,21 +253,23 @@ export class PopupComponent implements OnInit {
         };
 
         this.fotoService.editarFoto(dadosComId).subscribe(() => {
-          alert("Foto alterada com sucesso!");
+          this.showSuccess("Foto alterada com sucesso!");
           this.dialogRef.close();
         }, () => {
-          alert("erro!");
+          this.showError("erro!");
         })
       } else {
         this.fotoService.gerarFoto(dadosParaEnviar).subscribe(() => {
-          alert("Foto gerada com sucesso");
+          this.showSuccess("Foto gerada com sucesso");
           this.dialogRef.close();
-        }, error => {
-          console.log("Erro!" + JSON.stringify(error));
+        }, () => {
+          this.showError("Erro!");
         });
-  }}}
+      }
+    }
+  }
 
-  criarCupom(){
+  criarCupom() {
     if (this.cupomForm.valid) {
       const cupom: Cupom = this.cupomForm.value;
       const dataFormatada = this.converterDataParaFormatoBackend(cupom.dataValidade!);
@@ -282,23 +286,24 @@ export class PopupComponent implements OnInit {
         };
 
         this.cupomService.editarCupom(dadosComId).subscribe(() => {
-          alert("Cupom alterado com sucesso!");
+          this.showSuccess("Cupom alterado com sucesso!");
           this.dialogRef.close();
         }, () => {
-          alert("erro!");
+          this.showError("erro!");
         })
       } else {
         this.cupomService.criarCupom(dadosParaEnviar).subscribe(() => {
-          alert("Cupom gerado com sucesso");
+          this.showSuccess("Cupom gerado com sucesso");
           this.dialogRef.close();
-        }, error => {
-          console.log("Erro!" + JSON.stringify(error));
+        }, () => {
+          this.showError("Erro!");
         });
-  }}
+      }
+    }
   }
 
-  adicionarPortifolio(){
-    if(this.portifolioForm.valid){
+  adicionarPortifolio() {
+    if (this.portifolioForm.valid) {
       const portifolio: Portifolio = this.portifolioForm.value;
 
       if (this.data.isEdit) {
@@ -308,44 +313,44 @@ export class PopupComponent implements OnInit {
         };
 
         this.portifoliService.editarFoto(dadosComId).subscribe(() => {
-          alert("Foto Alterada!");
+          this.showSuccess("Foto Alterada!");
           this.dialogRef.close();
         }, () => {
-          alert("erro!");
+          this.showError("erro!");
         })
       } else {
         this.portifoliService.salvarFoto(portifolio).subscribe(() => {
-          alert("Foto adicionada com sucesso");
+          this.showSuccess("Foto adicionada com sucesso");
           this.dialogRef.close();
-        }, error => {
-          console.log("Erro!" + JSON.stringify(error));
+        }, () => {
+          this.showError("Erro!");
         })
       }
 
     }
   }
 
-  adicionarFeedback(){
-    if(this.feedbackForm.valid){
+  adicionarFeedback() {
+    if (this.feedbackForm.valid) {
       const feedback: Feedback = this.feedbackForm.value;
 
       this.feedbackService.salvarFeed(feedback).subscribe(() => {
-        alert("Feedback enviado para aprovação!");
+        this.showSuccess("Feedback enviado para aprovação!");
         this.dialogRef.close();
       }, () => {
-        alert("erro!");
+        this.showError("erro!");
       });
 
     }
   }
 
-  deletarFoto(foto: Foto){
+  deletarFoto(foto: Foto) {
     this.fotoService.deletarFoto(foto).subscribe(response => {
-      if(response = true){
-        alert("Foto deletada com sucesso!");
+      if (response = true) {
+        this.showSuccess("Foto deletada com sucesso!");
         this.dialogRef.close();
       } else {
-        alert("Erro ao deletar!");
+        this.showError("Erro ao deletar!");
       }
     })
   }
@@ -356,7 +361,7 @@ export class PopupComponent implements OnInit {
   }
 
   setNota(nota: number): void {
-    this.feedbackForm.controls['nota'].setValue(nota); 
+    this.feedbackForm.controls['nota'].setValue(nota);
   }
 
 
@@ -397,5 +402,13 @@ export class PopupComponent implements OnInit {
 
     // Reformatar para "yyyy-MM-dd"
     return `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+  }
+
+  showSuccess(msg: string) {
+    this.toastr.success(msg);
+  }
+
+  showError(msg: string) {
+    this.toastr.error(msg);
   }
 }

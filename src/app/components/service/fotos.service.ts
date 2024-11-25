@@ -10,7 +10,7 @@ import { Usuario } from '../model/usuario.model';
 })
 export class FotosService {
 
-  private readonly API = "http://localhost:8080/foto"
+  private readonly API = "https://appjulio.onrender.com/foto"
 
   constructor(private http: HttpClient) { }
 
@@ -34,7 +34,7 @@ export class FotosService {
   public statusTrabalho(usuarioId: number): Observable<StatusTrabalho> {
     return this.http.get<StatusTrabalho>(this.API + "/status/" + usuarioId);
   }
-  
+
   public deletarFoto(foto: Foto): Observable<boolean> {
     return this.http.delete<boolean>(this.API + "/" + foto.id);
   }

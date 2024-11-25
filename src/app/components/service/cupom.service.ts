@@ -8,23 +8,23 @@ import { Usuario } from '../model/usuario.model';
   providedIn: 'root'
 })
 export class CupomService {
-  private readonly API = "http://localhost:8080/cupom";
+  private readonly API = "https://appjulio.onrender.com/cupom";
 
   constructor(private http: HttpClient) { }
 
-  public criarCupom(cupom: Cupom): Observable<Cupom>{
+  public criarCupom(cupom: Cupom): Observable<Cupom> {
     return this.http.post<Cupom>(this.API, cupom);
   }
 
-  public listarCupons(): Observable<Cupom[]>{
+  public listarCupons(): Observable<Cupom[]> {
     return this.http.get<Cupom[]>(this.API);
   }
-  
-  public ContagemCuponsInd(usuario: Usuario): Observable<number>{
+
+  public ContagemCuponsInd(usuario: Usuario): Observable<number> {
     return this.http.get<number>(this.API + "/" + usuario.id);
   }
 
-  public editarCupom(cupom: Cupom): Observable<Cupom>{
+  public editarCupom(cupom: Cupom): Observable<Cupom> {
     return this.http.put<Cupom>(this.API, cupom);
   }
 }

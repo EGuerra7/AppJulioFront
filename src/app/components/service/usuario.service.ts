@@ -8,23 +8,23 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioService {
 
-  private readonly API = "http://localhost:8080/usuario"
+  private readonly API = "https://appjulio.onrender.com/usuario"
 
   constructor(private http: HttpClient) { }
 
-  cadastrarUsuario(usuario: Usuario): Observable<Usuario>{
+  cadastrarUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.API, usuario);
   }
 
-  editarUsuario(usuario: Usuario): Observable<Usuario>{
+  editarUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http.put<Usuario>(this.API, usuario);
   }
 
-  listarIndividual(usuario: Usuario): Observable<Usuario>{
+  listarIndividual(usuario: Usuario): Observable<Usuario> {
     return this.http.get<Usuario>(this.API + "/" + usuario.id);
   }
 
-  listarUsuarios(): Observable<Usuario[]>{
+  listarUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.API);
   }
 }

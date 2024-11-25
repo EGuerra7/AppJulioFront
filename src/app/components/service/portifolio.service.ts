@@ -8,23 +8,23 @@ import { Portifolio } from '../model/portifolio.model';
 })
 export class PortifolioService {
 
-  private readonly API = "http://localhost:8080/port"
+  private readonly API = "https://appjulio.onrender.com/port"
 
   constructor(private http: HttpClient) { }
 
-  public listarFotos(): Observable<Portifolio[]>{
+  public listarFotos(): Observable<Portifolio[]> {
     return this.http.get<Portifolio[]>(this.API);
   }
 
-  public salvarFoto(foto: Portifolio): Observable<Portifolio>{
+  public salvarFoto(foto: Portifolio): Observable<Portifolio> {
     return this.http.post<Portifolio>(this.API, foto);
   }
-  
-  public editarFoto(foto: Portifolio): Observable<Portifolio>{
+
+  public editarFoto(foto: Portifolio): Observable<Portifolio> {
     return this.http.put<Portifolio>(this.API, foto);
   }
-  
-  public deletarFoto(foto: Portifolio): Observable<boolean>{
+
+  public deletarFoto(foto: Portifolio): Observable<boolean> {
     return this.http.delete<boolean>(this.API + "/" + foto.id);
   }
 

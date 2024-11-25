@@ -11,19 +11,19 @@ import { Foto } from '../model/foto.model';
 })
 export class CompraCupomService {
 
-  private readonly API = "http://localhost:8080/compraCupom";
+  private readonly API = "https://appjulio.onrender.com/compraCupom";
 
   constructor(private http: HttpClient) { }
 
-  comprarCupom(compra: CompraCupom):Observable<boolean>{
+  comprarCupom(compra: CompraCupom): Observable<boolean> {
     return this.http.post<boolean>(this.API, compra);
   }
 
-  usoCupom(compra: CompraCupom, foto: Foto): Observable<boolean>{
+  usoCupom(compra: CompraCupom, foto: Foto): Observable<boolean> {
     return this.http.post<boolean>(this.API + '/uso/' + foto.id, compra);
   }
 
-  listarCuponsInd(usuario: Usuario): Observable<Cupom[]>{
+  listarCuponsInd(usuario: Usuario): Observable<Cupom[]> {
     return this.http.get<Cupom[]>(this.API + "/" + usuario.id);
   }
 }
