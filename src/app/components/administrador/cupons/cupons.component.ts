@@ -20,13 +20,13 @@ export class CuponsComponent implements OnInit {
 
   cupons: Cupom[] = [];
 
-  constructor ( private cupomService: CupomService ) {}
+  constructor(private cupomService: CupomService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.buscarCupons();
   }
 
-  buscarCupons(){
+  buscarCupons() {
     this.cupomService.listarCupons().subscribe(response => {
       this.cupons = response;
     }, error => {
@@ -37,7 +37,7 @@ export class CuponsComponent implements OnInit {
   openDialog(tipo: string, item?: any, isEdit: boolean = false): void {
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '90%',
-      data: { tipo, item, isEdit: !!item  },
+      data: { tipo, item, isEdit: !!item },
     });
 
     dialogRef.afterClosed().subscribe(result => {
