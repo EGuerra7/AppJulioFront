@@ -92,7 +92,7 @@ section{
   }
 
   @media (width >= 1000px){
-    section{
+    main{
         width: 80%;
     }
     .info_nome{
@@ -104,7 +104,12 @@ section{
     }
 
     .box_feed .galantis{
-        width: 50px;
+        width: 350px;
     }
+
+    .rating img {
+        width: 50px;
+        height: 50px;
+      }
   }
   
