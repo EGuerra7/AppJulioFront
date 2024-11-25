@@ -105,7 +105,7 @@ header{
   height: 100%;
   opacity: 0;
   display: flex;
-  animation: slideInRight 0.7s normal;
+  animation: slideInRight 0.4s normal;
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
 }
