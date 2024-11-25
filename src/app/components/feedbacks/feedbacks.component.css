@@ -92,7 +92,10 @@ section{
   }
 
   @media (width >= 1000px){
-    main{
+    .titulo{
+        width: 80%;
+    }
+    .box_feed{
         width: 80%;
     }
     .info_nome{
