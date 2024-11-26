@@ -178,6 +178,14 @@ label{
 
   textarea {
     font-size: 15px;
+
+    &&::placeholder{
+      font-size: 15px;
+    }
+  }
+
+  .estrela-container span{
+    font-size: 15px;
   }
 
   .estrelas{
