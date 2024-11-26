@@ -34,6 +34,17 @@
   }
 }
 
+@-webkit-keyframes slideInRight {
+  from {
+    transform: translateX(300%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .animacaoAbrir{
   animation: abrirMenu .2s linear;
 }
@@ -152,7 +163,7 @@ ul{
 .menu_pc li a{
   text-decoration: none;
   color: var(--cor-principal);
-  font-size: 24px;
+  font-size: 18px;
   transition: .4s;
   cursor: pointer;
   padding: 2px 7px;
