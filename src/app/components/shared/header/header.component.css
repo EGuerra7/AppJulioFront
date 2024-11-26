@@ -117,7 +117,7 @@ header{
 
 .menu_mobile{
   height: 100%;
-  opacity: 0;
+  opacity: 1;
   display: flex;
   animation: slideInRight 0.8s ease-out 0.25s forwards;
   -webkit-animation: slideInRight 0.8s ease-out 0.25s forwards;
