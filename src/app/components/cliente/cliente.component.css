@@ -137,4 +137,32 @@ b, .cupom_btn{
   b, .cupom_btn{
     font-size: 9px;
   }
+
+  .trabalhos p{
+    font-size: 12px;
+  }
+}
+
+@media (width >= 800px){
+  .infos h1{
+    font-size: 22px;
+  }
+
+  .infos_user span{
+    font-size: 14px;
+  }
+
+  b, .cupom_btn{
+    font-size: 10px;
+  }
+
+  .trabalhos p{
+    font-size: 14px;
+  }
+
+  .logout mat-icon{
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
 }
