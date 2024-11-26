@@ -119,6 +119,7 @@ header{
   animation: slideInRight 0.4s normal;
   animation-delay: 0.25s;
   animation-fill-mode: forwards;
+  will-change: transform, opacity;
 }
 
 ul{
