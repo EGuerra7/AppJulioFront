@@ -10,8 +10,8 @@
         <li class="animated"><a [routerLink]="['/']" (click)="fecharMenu()">Portifólio</a></li>
         <li class="animated"><a [routerLink]="['/feedbacks']" (click)="fecharMenu()">Feedbacks</a></li>
         <li class="animated">
-          <a *ngIf="usuario && usuario.permissao === 'Administrador' " [routerLink]="['/administrador']" (click)="fecharMenu()">Área do Administrador</a>
-          <a *ngIf="!usuario || usuario.permissao != 'Administrador'" [routerLink]="['/cliente']" (click)="fecharMenu()">Área do Cliente</a>
+          <a *ngIf="usuario && usuario?.permissao === 'Administrador' " [routerLink]="['/administrador']" (click)="fecharMenu()">Área do Administrador</a>
+          <a *ngIf="!usuario || usuario?.permissao != 'Administrador'" [routerLink]="['/cliente']" (click)="fecharMenu()">Área do Cliente</a>
         </li>
         <li class="animated"><a [routerLink]="['/loja']" (click)="fecharMenu()">Loja</a></li>
       </ul>
