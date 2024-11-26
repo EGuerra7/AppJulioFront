@@ -145,7 +145,7 @@ b, .cupom_btn{
 
 @media (width >= 800px){
   .infos{
-    width: 90%;
+    width: 60%;
     gap: 1em;
   }
 
