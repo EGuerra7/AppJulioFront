@@ -116,9 +116,9 @@ header{
   height: 100%;
   opacity: 0;
   display: flex;
-  animation: slideInRight 0.4s normal;
+  animation: slideInRight 0.4s ease-out 0.25s forwards;
+  -webkit-animation: slideInRight 0.4s ease-out 0.25s forwards;
   animation-delay: 0.25s;
-  animation-fill-mode: forwards;
   will-change: transform, opacity;
 }
 
