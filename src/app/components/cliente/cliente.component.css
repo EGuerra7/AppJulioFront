@@ -124,3 +124,17 @@ b, .cupom_btn{
   top: 10px;
   font-weight: bold;
 }
+
+@media (width >= 600px){
+  .infos h1{
+    font-size: 22px;
+  }
+
+  .infos_user span{
+    font-size: 16px;
+  }
+
+  b, .cupom_btn{
+    font-size: 11px;
+  }
+}
