@@ -144,6 +144,12 @@ b, .cupom_btn{
 }
 
 @media (width >= 800px){
+  .infos{
+    width: 100%;
+    gap: 1em;
+  }
+
+
   .infos h1{
     font-size: 22px;
   }
