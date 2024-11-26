@@ -92,4 +92,8 @@ section{
     section{
       padding: 20%;
     }
+
+    h2, p{
+      font-size: 15px;
+    }
   }
