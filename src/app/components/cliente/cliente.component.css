@@ -184,9 +184,18 @@ b, .cupom_btn{
     width: 70%;
 
   }
+
   .box_fotos{
     width: 92%;
-    font-size: 15px;
+    font-size: 13px;
+  }
+
+  .fotos_subclass h2{
+    font-size: 14px;
+  }
+
+  .box_fotos b{
+    font-size: 13px;
   }
 
 }
