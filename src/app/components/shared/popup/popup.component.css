@@ -169,6 +169,27 @@ label{
 }
 
 
+@media (width >= 800px){
+  .form-group input[type="text"],
+  .form-group input[type="password"],
+  .form-group select {
+    font-size: 15px;
+  }
+
+  textarea {
+    font-size: 15px;
+  }
+
+  .estrelas{
+    width: 25px;
+  }
+
+  .acoes button{
+    font-size: 15px;
+  }
+}
+
+
 
 
 

@@ -67,6 +67,6 @@ main{
 
   @media(width >= 1000px){
     main .add{
-      width: 40%;
+      width: 20%;
     }
   }
