@@ -145,7 +145,7 @@ b, .cupom_btn{
 
 @media (width >= 800px){
   .infos{
-    width: 100%;
+    width: 90%;
     gap: 1em;
   }
 
@@ -156,6 +156,10 @@ b, .cupom_btn{
 
   .infos_user span{
     font-size: 14px;
+  }
+
+  .infos_user{
+    justify-content: left;
   }
 
   b, .cupom_btn{
