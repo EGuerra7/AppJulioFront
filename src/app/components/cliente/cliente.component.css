@@ -176,3 +176,17 @@ b, .cupom_btn{
     height: 18px;
   }
 }
+
+
+@media (width >= 1200px){
+
+  .fotos{
+    width: 70%;
+
+  }
+  .box_fotos{
+    width: 92%;
+    font-size: 15px;
+  }
+
+}
