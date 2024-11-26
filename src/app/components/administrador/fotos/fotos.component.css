@@ -96,3 +96,20 @@ tbody button{
   color: var(--cor-principal);
   font-size: 8px;
 }
+
+
+@media(width >= 700px){
+  th, td, tbody button{
+    font-size: 10px;
+  }
+}
+
+@media(width >= 1000px){
+  th, td, tbody button{
+    font-size: 12px;
+  }
+
+  table{
+    width: 90%;
+  }
+}
