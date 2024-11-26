@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit{
     const menu = document.getElementById('menu') as HTMLElement;
     const overlay = document.getElementById('overlay') as HTMLElement;
     overlay.style.display = "none";
-    menu.classList.remove('animacaoAbrirv');
+    menu.classList.remove('animacaoAbrir');
     menu.classList.add('animacaoFechar');
     setTimeout(() => {
       menu.style.display = "none";
