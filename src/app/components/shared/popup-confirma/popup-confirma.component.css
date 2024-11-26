@@ -86,3 +86,10 @@ section{
     border-radius: 10px;
     cursor: pointer;
   }
+
+
+  @media (width <= 800px) {
+    section{
+      width: 70%;
+    }
+  }

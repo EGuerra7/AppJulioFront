@@ -170,6 +170,11 @@ label{
 
 
 @media (width >= 800px){
+
+  section{
+    width: 70%;
+  }
+
   .form-group input[type="text"],
   .form-group input[type="password"],
   .form-group select {
