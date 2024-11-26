@@ -90,7 +90,7 @@ section{
 
   @media (width <= 800px) {
     section{
-      padding: 20%;
+      padding: 0 20%;
     }
 
     h2, p{

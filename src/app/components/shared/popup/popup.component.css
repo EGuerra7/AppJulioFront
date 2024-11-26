@@ -172,7 +172,7 @@ label{
 @media (width >= 800px){
 
   section{
-    padding: 20%;
+    padding: 0 20%;
   }
 
   .form-group input[type="text"],
