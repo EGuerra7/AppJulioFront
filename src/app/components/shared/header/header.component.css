@@ -41,11 +41,13 @@
     -webkit-transform: translateX(300%);
     transform: translateX(300%);
     opacity: 0;
+    -webkit-opacity: 0;
   }
   to {
     -webkit-transform: translateX(0);
     transform: translateX(0);
     opacity: 1;
+    -webkit-opacity: 1;
   }
 }
 
