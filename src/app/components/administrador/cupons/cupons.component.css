@@ -106,5 +106,9 @@ main{
     table{
       width: 90%;
     }
+
+    main button{
+      width: 40%;
+    }
   }
   

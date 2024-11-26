@@ -64,3 +64,9 @@ main{
     background-color: transparent;
     color: var(--cor-principal);
   }
+
+  @media(width >= 1000px){
+    main .add{
+      width: 40%;
+    }
+  }
