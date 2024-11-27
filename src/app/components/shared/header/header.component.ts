@@ -44,7 +44,10 @@ export class HeaderComponent implements OnInit{
   fecharMenu(){
     const menu = document.getElementById('menu') as HTMLElement;
     const overlay = document.getElementById('overlay') as HTMLElement;
+    const links = document.getElementById('menu_mobile') as HTMLElement;
     overlay.style.display = "none";
+    links.classList.remove('animacaoAbrirLinks')
+    links.classList.add('animacaoFecharLinks')
     menu.classList.remove('animacaoAbrir');
     menu.classList.add('animacaoFechar');
     setTimeout(() => {
@@ -56,9 +59,12 @@ export class HeaderComponent implements OnInit{
   abrirMenu(){
     const menu = document.getElementById('menu') as HTMLElement;
     const overlay = document.getElementById('overlay') as HTMLElement;
+    const links = document.getElementById('menu_mobile') as HTMLElement;
 
     overlay.style.display = "block";
     menu.style.display = "flex";
+    links.classList.add('animacaoAbrirLinks')
+    links.classList.remove('animacaoFecharLinks')
     menu.classList.remove('animacaoFechar');
     menu.classList.add('animacaoAbrir');
     };

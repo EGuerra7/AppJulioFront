@@ -119,9 +119,17 @@ header{
   opacity: 1;
   transform: translateX(300%);
   display: flex;
-  animation: slideInRight 0.8s ease-out 0.25s forwards;
-  -webkit-animation: slideInRight 0.8s ease-out 0.25s forwards;
   will-change: transform;
+}
+
+.animacaoAbrirLinks {
+  animation: slideInRight 0.2s ease-out forwards;
+  -webkit-animation: slideInRight 0.2s ease-out forwards;
+}
+
+.animacaoFecharLinks {
+  animation: slideOutRight 0.2s ease-in forwards;
+  -webkit-animation: slideOutRight 0.2s ease-in forwards;
 }
 
 ul{
