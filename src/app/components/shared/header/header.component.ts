@@ -48,8 +48,8 @@ export class HeaderComponent implements OnInit{
     overlay.style.display = "none";
     links.classList.remove('animacaoAbrirLinks')
     links.classList.add('animacaoFecharLinks')
-    menu.classList.remove('animacaoAbrir');
     menu.classList.add('animacaoFechar');
+    menu.classList.remove('animacaoAbrir');
     setTimeout(() => {
       menu.style.display = "none";
     }, 190);
