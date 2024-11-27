@@ -121,7 +121,7 @@ export class PopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarUsuarios();
-    this.initializeForm();
+    
   }
 
   initializeForm(): void {
@@ -164,6 +164,7 @@ export class PopupComponent implements OnInit {
   buscarUsuarios() {
     this.usuarioService.listarUsuarios().subscribe(response => {
       this.listUsuarios = response;
+      this.initializeForm();
     }, error => {
       console.log("Erro ao encontrar os usuários!");
     })
