@@ -51,7 +51,7 @@
   animation: abrirMenu .2s linear;
 }
 .animacaoFechar{
-  animation: fecharMenu .2s linear;
+  animation: fecharMenu .2s linear .2s;
 }
 
 
@@ -123,13 +123,13 @@ header{
 }
 
 .animacaoAbrirLinks {
-  animation: slideInRight 0.2s ease-out forwards;
-  -webkit-animation: slideInRight 0.2s ease-out forwards;
+  animation: slideInRight 0.4s ease-out 0.25s forwards; 
+  -webkit-animation: slideInRight 0.4s ease-out 0.25s forwards;
 }
 
 .animacaoFecharLinks {
-  animation: slideOutRight 0.2s ease-in forwards;
-  -webkit-animation: slideOutRight 0.2s ease-in forwards;
+  animation: slideOutRight 0.4s ease-in forwards; 
+  -webkit-animation: slideOutRight 0.4s ease-in forwards;
 }
 
 ul{
