@@ -14,8 +14,7 @@ main h1{
   font-size: 20px;
   margin: 0;
 }
-
-main button{
+.add{
   background-color: var(--cor-principal);
   width: 95%;
   height: 30px;
@@ -99,13 +98,13 @@ tr:last-child {
 
 
 @media(width >= 700px){
-  th, td, tbody button{
+  th, td, .button_name{
     font-size: 10px;
   }
 }
 
 @media(width >= 1000px){
-  th, td, tbody button{
+  th, td, .button_name{
     font-size: 12px;
   }
 
@@ -113,7 +112,7 @@ tr:last-child {
     width: 90%;
   }
 
-  main button{
+  .add{
     width: 20%;
   }
 }
