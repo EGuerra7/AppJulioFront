@@ -72,10 +72,17 @@ section{
     font-size: 12px;
   }
 
-  @media(width <= 330px){
+  @media(width <= 400px){
+    section{
+      width: 100%;
+    }
     .cupom_txt{
         font-size: 17px;
     }
+
+    .cupom_txt button{
+      font-size: 14px;
+  }
   }
 
   @media(width >= 450px){
