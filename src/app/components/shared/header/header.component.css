@@ -51,7 +51,7 @@
   animation: abrirMenu .2s linear;
 }
 .animacaoFechar{
-  animation: fecharMenu .2s linear .2s;
+  animation: fecharMenu .2s linear;
 }
 
 
