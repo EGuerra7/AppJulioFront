@@ -87,7 +87,7 @@ tr:last-child {
   border-bottom: none;
 }
 
-tbody button{
+.button_name{
   background-color: transparent;
   border: 0;
   cursor: pointer;
