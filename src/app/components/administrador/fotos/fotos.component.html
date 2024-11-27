@@ -47,7 +47,7 @@
         <tr *ngFor="let foto of fotosEmAndamento">
           <td>{{ foto.data | date:'dd/MM/yyyy'  }}</td>
           <td>{{ foto.horaFormatada }}</td>
-          <td><button (click)="openDialog('Foto', foto)">{{ foto.usuario?.nomeFormatado }}</button></td>
+          <td><button class="button_name" (click)="openDialog('Foto', foto)">{{ foto.usuario?.nomeFormatado }}</button></td>
           <td>{{ foto.tipo }}</td>
           <td>R$ {{ foto.valorRestante }}</td>
         </tr>
@@ -73,7 +73,7 @@
         <tr *ngFor="let foto of fotosConcluidas">
           <td>{{ foto.data | date:'dd/MM/yyyy'  }}</td>
           <td>{{ foto.horaFormatada }}</td>
-          <td><button (click)="openDialog('Foto', foto)">{{ foto.usuario?.nomeFormatado }}</button></td>
+          <td><button class="button_name" (click)="openDialog('Foto', foto)">{{ foto.usuario?.nomeFormatado }}</button></td>
           <td>{{ foto.tipo }}</td>
           <td>R$ {{ foto.valorRestante }}</td>
         </tr>
