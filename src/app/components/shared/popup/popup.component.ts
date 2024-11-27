@@ -143,7 +143,7 @@ export class PopupComponent implements OnInit {
       status: new FormControl(this.isFoto ? item.status || "" : "", Validators.required),
       linkFoto: new FormControl(this.isFoto ? item.linkFoto || "" : ""),
       click: new FormControl(this.isFoto ? item.click || null : null, Validators.required),
-      usuCupom: new FormControl(this.isFoto ? item.click || null : false)
+      usuCupom: new FormControl(this.isFoto ? item.usoCupom || null : false)
     });
 
     const dataAtual = new Date();
