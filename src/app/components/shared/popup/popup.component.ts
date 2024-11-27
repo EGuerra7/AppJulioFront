@@ -90,7 +90,7 @@ export class PopupComponent implements OnInit {
       status: new FormControl(this.isFoto ? item.status || "" : "", Validators.required),
       linkFoto: new FormControl(this.isFoto ? item.linkFoto || "" : ""),
       click: new FormControl(this.isFoto ? item.click || null : null, Validators.required),
-      usoCupom: new FormControl(this.isFoto ? item.usoCupom || null : false)
+      usoCupom: new FormControl(this.isFoto ? item.usoCupom || false : false)
     })
 
     this.cupomForm = new FormGroup({
@@ -121,6 +121,7 @@ export class PopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarUsuarios();
+    this.initializeForm();
   }
 
   initializeForm(): void {
@@ -143,7 +144,7 @@ export class PopupComponent implements OnInit {
       status: new FormControl(this.isFoto ? item.status || "" : "", Validators.required),
       linkFoto: new FormControl(this.isFoto ? item.linkFoto || "" : ""),
       click: new FormControl(this.isFoto ? item.click || null : null, Validators.required),
-      usuCupom: new FormControl(this.isFoto ? item.usoCupom || null : false)
+      usuCupom: new FormControl(this.isFoto ? item.usoCupom || false : false)
     });
 
     const dataAtual = new Date();
@@ -163,7 +164,6 @@ export class PopupComponent implements OnInit {
   buscarUsuarios() {
     this.usuarioService.listarUsuarios().subscribe(response => {
       this.listUsuarios = response;
-      this.initializeForm();
     }, error => {
       console.log("Erro ao encontrar os usuários!");
     })
