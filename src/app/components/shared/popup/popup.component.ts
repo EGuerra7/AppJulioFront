@@ -90,7 +90,7 @@ export class PopupComponent implements OnInit {
       status: new FormControl(this.isFoto ? item.status || "" : "", Validators.required),
       linkFoto: new FormControl(this.isFoto ? item.linkFoto || "" : ""),
       click: new FormControl(this.isFoto ? item.click || null : null, Validators.required),
-      usoCupom: new FormControl(this.isFoto ? item.usoCupom || false : false)
+      usoCupom: new FormControl(this.isFoto ? item.usoCupom || null : false)
     })
 
     this.cupomForm = new FormGroup({
