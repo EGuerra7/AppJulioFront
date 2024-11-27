@@ -58,6 +58,13 @@ section{
     }
   }
 
+  .fotos_list{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
 
   .box_fotos{
     display: flex;
