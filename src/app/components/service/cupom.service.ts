@@ -8,7 +8,7 @@ import { Usuario } from '../model/usuario.model';
   providedIn: 'root'
 })
 export class CupomService {
-  private readonly API = "https://appjulio.onrender.com/cupom";
+  private readonly API = "http://localhost:8080/cupom";
 
   constructor(private http: HttpClient) { }
 

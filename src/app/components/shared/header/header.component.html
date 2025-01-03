@@ -1,6 +1,6 @@
 <div class="overlay" id="overlay" (click)="fecharMenu()"></div>
 <header>
-  <img src="../../../../assets/logo.svg">
+  <img [routerLink]="['/']" src="../../../../assets/logo.svg">
 
   <button class="btn_menu" (click)="abrirMenu()"><mat-icon class="menuBTN">menu</mat-icon></button>
   <section id="menu">

@@ -11,7 +11,7 @@ import { Foto } from '../model/foto.model';
 })
 export class CompraCupomService {
 
-  private readonly API = "https://appjulio.onrender.com/compraCupom";
+  private readonly API = "http://localhost:8080/compraCupom";
 
   constructor(private http: HttpClient) { }
 

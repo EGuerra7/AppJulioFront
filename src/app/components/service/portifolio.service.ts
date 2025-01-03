@@ -8,7 +8,7 @@ import { Portifolio } from '../model/portifolio.model';
 })
 export class PortifolioService {
 
-  private readonly API = "https://appjulio.onrender.com/port"
+  private readonly API = "http://localhost:8080/port"
 
   constructor(private http: HttpClient) { }
 

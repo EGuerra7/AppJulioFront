@@ -8,7 +8,7 @@ import { Feedback } from '../model/feedback.model';
 })
 export class FeedbackService {
 
-  private readonly API = "https://appjulio.onrender.com/feedback"
+  private readonly API = "http://localhost:8080/feedback"
 
   constructor(private http: HttpClient) { }
 

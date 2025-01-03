@@ -24,3 +24,13 @@ body { margin: 0; font-family: var(--fonte); }
   top: 1%;
 }
 
+.toast-success {
+  background-color: var(--cor-principal) !important; 
+  color: white;
+}
+
+.toast-info {
+  background-color: var(--cor-secundaria) !important; 
+  color: var(--cor-principal) !important;
+}
+

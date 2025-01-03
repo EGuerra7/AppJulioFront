@@ -13,7 +13,7 @@ export class LoginService {
   private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
   usuario$ = this.usuarioSubject.asObservable();
 
-  private readonly API = "https://appjulio.onrender.com/usuario/login"
+  private readonly API = "http://localhost:8080/usuario/login"
 
   constructor(private http: HttpClient, private router: Router) {
     this.carregarUsuarioLocal();

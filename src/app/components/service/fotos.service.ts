@@ -10,7 +10,7 @@ import { Usuario } from '../model/usuario.model';
 })
 export class FotosService {
 
-  private readonly API = "https://appjulio.onrender.com/foto"
+  private readonly API = "http://localhost:8080/foto"
 
   constructor(private http: HttpClient) { }
 

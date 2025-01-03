@@ -31,7 +31,7 @@ export class HomeComponent implements	OnInit{
           .map((foto) => ({
             src: `https://i.ibb.co/${foto.url}`,
           }))
-          .sort(() => Math.random() - 0.5);
+          .sort(() => Math.random() - 0.2);
 
         this.images$.next(shuffledImages); // Atualiza o Observable
 
